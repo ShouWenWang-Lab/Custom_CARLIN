@@ -1,4 +1,4 @@
-function [ratio_by_eventful_UMI,ratio_by_allele,ave_insert_len,ave_del_len]=ins_del_statistics(summary)        
+function [ins_del_ratio_ratio_by_eventful_UMI,ins_del_ratio_by_allele,ave_insert_len,ave_del_len]=ins_del_statistics(summary)        
 
 allele_breakdown_by_sample = summary.allele_freqs;
 N_samples = size(allele_breakdown_by_sample,2);
@@ -25,8 +25,9 @@ del_freq = cellfun(@(x) x/summary.N.eventful_tags, del_freq, 'un', false);
 end
 
 
-ratio_by_eventful_UMI=sum(ins_freq{:})/sum(del_freq{:});  % an allele might correspond to multiple UMI. 
-ratio_by_allele=sum(N_ins)/sum(N_del); % an allele might have multiple insertion or deletion events
+% the ratio between insertion and deletion events
+ins_del_ratio_ratio_by_eventful_UMI=sum(ins_freq{:})/sum(del_freq{:});  % the an allele might correspond to multiple UMI. 
+ins_del_ratio_by_allele=sum(N_ins)/sum(N_del); % an allele might have multiple insertion or deletion events
 
 x1=1:L_max;
 y1=horzcat(ins_freq{:});

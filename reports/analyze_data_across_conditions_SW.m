@@ -1,4 +1,4 @@
-function [data_table,annotation]=analyze_data_across_conditions_SW(SampleList,dir_name)
+function analyze_data_across_conditions_SW(SampleList,dir_name)
 
 
     %% start the analysis
@@ -34,8 +34,8 @@ function [data_table,annotation]=analyze_data_across_conditions_SW(SampleList,di
     writematrix(matrix,'result.csv')
     
     fid = fopen('variable_names.txt','w');
-    fid2= fopen('result.csv','w');
-    for jj = 1 : size(annotation, 1)
+    fid2= fopen('result.csv','a');
+    for jj = 1 : length(annotation)
       fprintf( fid, annotation(jj) );
       fprintf( fid, '\n' );
       
@@ -43,6 +43,8 @@ function [data_table,annotation]=analyze_data_across_conditions_SW(SampleList,di
       fprintf( fid2, ',' );
     end
     fclose(fid);
+    
+    writematrix(matrix,'result_2.csv')
     
     
     fid = fopen('sample_names.txt','w');
