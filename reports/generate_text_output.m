@@ -86,8 +86,12 @@ function generate_text_output(summary, params, thresholds, output_path)
     fprintf(fid, '%-55s %10d\n', 'Effective Alleles:', round(effective_alleles(summary)));
     fprintf(fid, '%-55s %10.2f\n', 'Diversity Index (normalized by all):', diversity_index(summary, false));
     fprintf(fid, '%-55s %10.2f\n', 'Diversity Index (normalized by edited):', diversity_index(summary, true));
-    fprintf(fid, '%-55s %10.2f\n', 'Mean CARLIN potential (by allele):', ...
-        max(mean(cellfun(@(x) CARLIN_def.getInstance.N.segments-length(Mutation.find_modified_sites(x)), summary.alleles)),0));
+    
+    vector=cellfun(@(x) CARLIN_def.getInstance.N.segments-length(Mutation.find_modified_sites(x)), summary.alleles);
+    CARLIN_potential_by_UMI=max(sum(vector.*summary.allele_freqs)/sum(summary.allele_freqs),0); % new form, by UMI
+    CARLIN_potential_by_allel=max(mean(vector),0); % original form, by allele, not by UMI
+    fprintf(fid, '%-55s %10.2f\n', 'Mean CARLIN potential (by allele):', CARLIN_potential_by_allel);
+    fprintf(fid, '%-55s %10.2f\n', 'Mean CARLIN potential (by UMI):',CARLIN_potential_by_UMI);
     
     fclose(fid);
     copyfile(filename, [output_path '/Results.txt']);
