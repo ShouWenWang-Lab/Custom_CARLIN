@@ -1,0 +1,15 @@
+{
+	"type": "Sanger",
+	"trim": {
+		"Primer5": "exact",
+		"Primer3": "exact",
+		"SecondarySequence": "exact"
+	},
+	"UMI" : {
+		"length" : 0
+	},	
+	"read_perspective" : {
+		"ShouldComplement" : "N",
+		"ShouldReverse"	: "N"
+	}
+}

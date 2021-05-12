@@ -1,0 +1,24 @@
+{
+	"type": "SC",
+	"SC": {
+		"Platform": "InDrops",		
+		"Version": 3
+	},	
+	"trim": {
+		"Primer5": "malformed",
+		"Primer3": "ignore",
+		"SecondarySequence": "malformed"
+	},
+	"UMI" : {
+		"length" : 6
+	},
+	"CB" : [ {
+		"length" : 8
+	}, {
+		"length" : 8
+	} ],
+	"read_perspective" : {
+		"ShouldComplement" : "N",
+		"ShouldReverse"	: "N"
+	}
+}
