@@ -1,6 +1,7 @@
 Analysis_5FU.mat
 Bank.mat.gz
-tests/
+tests/Output/*
+tests/data/*
 my_data/
 cfg/*txt.gz
 slurm*
