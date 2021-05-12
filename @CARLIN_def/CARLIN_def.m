@@ -1,23 +1,24 @@
-classdef (Sealed) CARLIN_def < handle
-        
+classdef (Sealed) CARLIN_def < handle        
     %% CARLIN Sequence
     properties (Constant, GetAccess=private)
-        segments = {'GACTGCACGACAGTCGACGA';
-                    'GACACGACTCGCGCATACGA';
-                    'GACTACAGTCGCTACGACGA';
-                    'GCGAGCGCTATGAGCGACTA';
-                    'GATACGATACGCGCACGCTA';
-                    'GAGAGCGCGCTCGTCGACTA';
-                    'GCGACTGTACGCACACGCGA';
-                    'GATAGTATGCGTACACGCGA';
-                    'GAGTCGAGACGCTGACGATA';
-                    'GATACGTAGCACGCAGACGA'};
-        prefix = 'CGCCG';
-        pam = 'TGGAGTC';
-        postfix = 'TGGGAGCT';
-        Primer5 = 'GAGCTGTACAAGTAAGCGGC';
-        Primer3 = 'CGACTGTGCCTTCTAGTTGC';
-        SecondarySequence = 'AGAATTCTAACTAGAGCTCGCTGATCAGCCT';
+        segments = {'TAGTCGACGAGCGCGCTCTCGCTC';
+                    'TCGTCTGCGTGCTACGTATCGACT';
+                    'TCGTCGACTGTCGTGCAGTCGACT';
+                    'TCGCGTGTGCGTACAGTCGCGACT';
+                    'TAGCGTGCGCGTATCGTATCGACT';
+                    'TCGTCGTAGCGACTGTAGTCGACT';
+                    'TCGCGTGTACGCATACTATCGACT';
+                    'TAGTCGCTCATAGCGCTCGCGACT';
+                    'TCGTATGCGCGAGTCGTGTCGACT';
+                    'TATCGTCAGCGTCTCGACTCCGGC'};
+        prefix = 'AGACT';%between Primer5 and first CARLIN segment, part of CARLIN sequnece
+        pam = 'CCA'; 
+        postfix = 'G'; % Part of CARLIN sequnece
+        Primer5 = 'GCAACTAGAAGGCACCGACA'; % the very beginning, TAGAAGGCACCGACA, not part of CARLIN SEQ 
+        %Primer5 = 'GCAANTAGAAGGCACCGACA'; % we modified the 5th bp from C to N to match the data
+        %Primer5 = 'GCAA'; 
+        Primer3 = 'GC'; %not part of CARLIN SEQ, need to reach the very end, not used to quality control (ignored). The last bases tend to be noisy  
+        SecondarySequence = 'ATTCGCGAGGTACCGA'; %after postfix, and before Primer3, not part of CARLIN SEQ, used to ensure the whole sequence is read 
     end
     
     %% Constant Definitions
@@ -46,32 +47,36 @@ classdef (Sealed) CARLIN_def < handle
             
             % Set counts of different element types
             obj.N.segments = size(obj.segments,1);
-            obj.N.pams     = obj.N.segments-1;
+            obj.N.pams     = obj.N.segments; % before, obj.N.pams     = obj.N.segments-1; 
             obj.N.motifs   = 2*obj.N.segments + obj.N.pams + 2;
-            
-            % Define types of different motifs
+
+            %% Define types of different motifs
             obj.motifs.prefix   = 1;
-            obj.motifs.consites = [2:3:obj.N.motifs];
-            obj.motifs.cutsites = [3:3:obj.N.motifs];
-            obj.motifs.pams     = [4:3:obj.N.motifs-1];
+            obj.motifs.consites = [4:3:obj.N.motifs]; %before: obj.motifs.consites = [2:3:obj.N.motifs];
+            obj.motifs.cutsites = [3:3:obj.N.motifs];% obj.motifs.cutsites = [3:3:obj.N.motifs] 
+            obj.motifs.pams     = [2:3:obj.N.motifs-1]; %obj.motifs.pams= [4:3:obj.N.motifs-1]
             obj.motifs.postfix  = obj.N.motifs;
-            
+
+
             % Define standard sequences
             obj.seq.Primer5 = obj.Primer5;
             obj.seq.Primer3 = obj.Primer3;
             obj.seq.SecondarySequence = obj.SecondarySequence;            
-            
+
             obj.seq.prefix   = obj.prefix;
             obj.seq.postfix  = obj.postfix;
             obj.seq.pam      = obj.pam;
             obj.seq.segments = obj.segments([1:obj.N.segments]);
+
+            %% (SW: mirror the structure)
             temp = cell(obj.N.segments+obj.N.pams+2,1);
             temp(1) = cellstr(obj.seq.prefix);
-            temp(2:2:end) = obj.seq.segments;
-            temp(3:2:end-1) = cellstr(obj.seq.pam);
+            temp(3:2:end) = obj.seq.segments;% before, temp(2:2:end) = obj.seq.segments;
+            temp(2:2:end-1) = cellstr(obj.seq.pam); % temp(3:2:end-1) = cellstr(obj.seq.pam);
             temp(end) = cellstr(obj.seq.postfix);
             obj.seq.CARLIN = horzcat(temp{:});
-            
+
+
             % Precompute widths
             obj.width.Primer5 = length(obj.Primer5);
             obj.width.Primer3 = length(obj.Primer3);
@@ -84,31 +89,34 @@ classdef (Sealed) CARLIN_def < handle
             obj.width.cutsite = 7;
             obj.width.consite = obj.width.segment-obj.width.cutsite;            
             obj.width.min_length = obj.width.prefix+obj.width.consite+obj.width.postfix;
-            
-            % Define custom sequences
-            obj.seq.consites = cellfun(@(x) x(1:obj.width.consite), obj.seq.segments, 'un', false);
-            obj.seq.cutsites = cellfun(@(x) x(obj.width.consite+1:end), obj.seq.segments, 'un', false);
-           
+
+            %% Define custom sequences (SW: mirror the structure)
+            obj.seq.consites = cellfun(@(x) x(obj.width.consite+1:end), obj.seq.segments, 'un', false); % obj.seq.consites = cellfun(@(x) x(1:obj.width.consite), obj.seq.segments, 'un', false);
+            obj.seq.cutsites = cellfun(@(x) x(1:obj.width.consite), obj.seq.segments, 'un', false); % obj.seq.cutsites = cellfun(@(x) x(obj.width.consite+1:end), obj.seq.segments, 'un', false);
+
             % Define endpoints of different elements
-            temp = cumsum(cellfun(@length, temp));
-            temp = [[1; 1+temp(1:end-1)] temp];
-            
+            temp = cumsum(cellfun(@length, temp)); % the length for each segment
+            temp = [[1; 1+temp(1:end-1)] temp]; %
+
             obj.bounds.prefix   = temp(1,:);
-            obj.bounds.segments = temp(2:2:end,:);
-            obj.bounds.pams     = temp(3:2:end-1,:);
+            obj.bounds.segments = temp(3:2:end,:); % obj.bounds.segments = temp(2:2:end,:);
+            obj.bounds.pams     = temp(2:2:end-1,:); % obj.bounds.pams     = temp(3:2:end-1,:);
             obj.bounds.postfix  = temp(end,:);
-        
-            obj.bounds.consites  = [obj.bounds.segments(:,1) obj.bounds.segments(:,2)-obj.width.cutsite];
-            obj.bounds.cutsites  = [obj.bounds.segments(:,1)+obj.width.segment-obj.width.cutsite obj.bounds.segments(:,2)];            
-            
+
+            %% previous version. Now, switch "cutsite" and "consites"
+            %obj.bounds.consites  = [obj.bounds.segments(:,1) obj.bounds.segments(:,2)-obj.width.cutsite];
+            %obj.bounds.cutsites  = [obj.bounds.segments(:,1)+obj.width.segment-obj.width.cutsite obj.bounds.segments(:,2)];            
+            obj.bounds.cutsites  = [obj.bounds.segments(:,1) obj.bounds.segments(:,2)-obj.width.consite];
+            obj.bounds.consites  = [obj.bounds.segments(:,1)+obj.width.segment-obj.width.consite obj.bounds.segments(:,2)];   
+
             % Precompute bounds of ordered motifs
             obj.bounds.ordered                        = zeros(obj.N.motifs,2);
             obj.bounds.ordered(obj.motifs.prefix,:)   = obj.bounds.prefix;
             obj.bounds.ordered(obj.motifs.consites,:) = obj.bounds.consites;
             obj.bounds.ordered(obj.motifs.cutsites,:) = obj.bounds.cutsites;
-            obj.bounds.ordered(obj.motifs.pams,:)     = obj.bounds.pams;
+            obj.bounds.ordered(obj.motifs.pams,:)     = obj.bounds.pams; 
             obj.bounds.ordered(obj.motifs.postfix,:)  = obj.bounds.postfix;
-            
+
             % Precompute BP membership of all motif types
             obj.bps.prefix = obj.bounds.prefix(1):obj.bounds.prefix(2);
             obj.bps.consite = arrayfun(@(s,e) s:e, obj.bounds.consites(:,1)', obj.bounds.consites(:,2)', 'un', false);
@@ -118,7 +126,7 @@ classdef (Sealed) CARLIN_def < handle
             obj.bps.pam     = arrayfun(@(s,e) s:e, obj.bounds.pams(:,1)', obj.bounds.pams(:,2)', 'un', false);
             obj.bps.pam     = horzcat(obj.bps.pam{:});
             obj.bps.postfix = obj.bounds.postfix(1):obj.bounds.postfix(2);
-            
+
             % Define colors for different events used in visualization
             obj.color = containers.Map();
             obj.color('N') = [255, 255, 255];
@@ -126,7 +134,7 @@ classdef (Sealed) CARLIN_def < handle
             obj.color('M') = [0, 255, 0];
             obj.color('I') = [0, 0, 255];
             obj.color('D') = [255, 0, 0];
-            
+
             % Define transparency for different events used in visualization
             obj.alpha.prefix = 0.5;
             obj.alpha.consite = 0.7;
@@ -134,34 +142,44 @@ classdef (Sealed) CARLIN_def < handle
             obj.alpha.pam = 0.9;
             obj.alpha.postfix = 0.5;
             obj.alpha.overlay = 0.4;
-            
+
             obj.alpha.CARLIN = zeros(1,obj.width.CARLIN);
             obj.alpha.CARLIN(obj.bps.prefix)  = obj.alpha.prefix;
             obj.alpha.CARLIN(obj.bps.consite) = obj.alpha.consite;
             obj.alpha.CARLIN(obj.bps.cutsite) = obj.alpha.cutsite;
             obj.alpha.CARLIN(obj.bps.pam)     = obj.alpha.pam;
             obj.alpha.CARLIN(obj.bps.postfix) = obj.alpha.postfix;
-            
+
             % Empirically derived NUC44 alignment score thresholds to determine
             % a successful match.
             obj.match_score.Primer5   = 15;
             obj.match_score.Primer3   = 20;
-            obj.match_score.SecondarySequence = 30;
-            
+            obj.match_score.SecondarySequence = 20; % test this please, orignal: 30; we found that 22 is the critical number for our data
+
             open_penalty = cell(obj.N.motifs,1);
             open_penalty(obj.motifs.prefix )  = {10*ones(1, obj.width.prefix)};
-            open_penalty(obj.motifs.postfix)  = {[8.6:0.2:10]};
-            open_penalty(obj.motifs.cutsites) = {[8:-0.5:6.5 6 6 6]}; % Because we expect the alter- ations to be localized to the cutsites, the minimum value of the penalty was set to occur within 3 bp upstream of the PAM sequences with the penalty increasing linearly moving away from this location. 
-            open_penalty(obj.motifs.consites) = {[10:-0.125:8.5]};
-            open_penalty(obj.motifs.pams)     = {[8.6:0.2:9.8]};
+            temp_SW_postfix=ones(1,obj.width.postfix)+9;
+            open_penalty(obj.motifs.postfix)  = {temp_SW_postfix}; % edits here, before edition: {[8.6:0.2:10]};
+
+            open_penalty(obj.motifs.cutsites) = {[6 6 6 6.5 7 7.5 8]}; % reversed,  {[8:-0.5:6.5 6 6 6]};
+
+
+            % I extend it to 17bp from 13bp to account for my shortening the PAM to 3bp
+            open_penalty(obj.motifs.consites) =  {[8.5:0.125:10 10 10 10 10]}; %reversed,  {[10:-0.125:8.5]};
+
+            % i shorten it to 3bp from 7bp
+            %open_penalty(obj.motifs.pams)     = {[9.8:-0.2:8.6]}; %reversed, {[8.6:0.2:9.8]};
+            open_penalty(obj.motifs.pams)     = {[9.8 9.6 9.4]};
             obj.open_penalty = [10 horzcat(open_penalty{:})];
-    
+
             close_penalty = cell(obj.N.motifs,1);
             close_penalty(obj.motifs.prefix )  = {10*ones(1, obj.width.prefix)};
-            close_penalty(obj.motifs.postfix)  = {[8.6:0.2:10]};
-            close_penalty(obj.motifs.cutsites) = {[8:-0.5:6.5 6.5 6.5 6.5]};
-            close_penalty(obj.motifs.consites) = {[10:-0.125:8.5]};
-            close_penalty(obj.motifs.pams)     = {[8.6:0.2:9.8]};
+            close_penalty(obj.motifs.postfix)  = {temp_SW_postfix}; %{[8.6:0.2:10]};
+            close_penalty(obj.motifs.cutsites) = {[6.5 6.5 6.5 6.5 7 7.5 8]}; %[8:-0.5:6.5 6.5 6.5 6.5]
+            % same here, extend it 
+            close_penalty(obj.motifs.consites) = {[8.5:0.125:10 10 10 10 10]}; %{[10:-0.125:8.5]}
+            %close_penalty(obj.motifs.pams)     = {[9.8:-0.2:8.6]}; %reversed, {[8.6:0.2:9.8]};
+            close_penalty(obj.motifs.pams)     = {[9.8 9.6 9.4]};
             obj.close_penalty = horzcat(close_penalty{:});
 
             sub_score = nuc44;

@@ -1,6 +1,7 @@
-function [data_table,annotation]=analyze_data_across_conditions_SW(SampleList,dir_name)
+function analyze_data_across_conditions_SW(SampleList,dir_name)
 
 
+    install_CARLIN
     %% start the analysis
     sample_name_array=split(SampleList,',');
 
