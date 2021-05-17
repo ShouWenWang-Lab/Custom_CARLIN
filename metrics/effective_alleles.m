@@ -1,7 +1,7 @@
 function ec = effective_alleles(varargin)
     if (nargin == 1)
         summary = varargin{1};
-        assert(isa(summary, 'ExperimentSummary'));
+        %assert(isa(summary, 'ExperimentSummary'));
         refseq = CARLIN_def.getInstance.seq.CARLIN;
         is_template = ismember(cellfun(@(x) degap(x.get_seq), summary.alleles, 'un', false), refseq);
         allele_counts = summary.allele_freqs;
