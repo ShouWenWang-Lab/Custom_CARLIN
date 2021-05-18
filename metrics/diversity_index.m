@@ -1,5 +1,5 @@
 function di = diversity_index(summary, normalize_by_edited)
-    assert(isa(summary, 'ExperimentSummary'));
+    %assert(isa(summary, 'ExperimentSummary'));
     if (~isempty(summary.allele_freqs))
         refseq = CARLIN_def.getInstance.seq.CARLIN;
         is_template = ismember(cellfun(@(x) degap(x.get_seq), summary.alleles, 'un', false), refseq);

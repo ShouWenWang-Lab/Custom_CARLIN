@@ -13,7 +13,8 @@ function analyze_data_across_conditions_SW(SampleList,dir_name)
         %% prepare file and folder
         
         sample_name=sample_name_array(j);
-
+        disp("Current sample: "+sample_name)
+        
         output_dir=dir_name+"/"+sample_name;%+"_mo_v1_autoThresh3";
         mkdir(output_dir)
         cd(output_dir)
@@ -28,6 +29,8 @@ function analyze_data_across_conditions_SW(SampleList,dir_name)
         end
     end
     
+    
+
     %% check computed file
     max_length=0;
     max_index=0;
@@ -41,6 +44,11 @@ function analyze_data_across_conditions_SW(SampleList,dir_name)
     if max_index==0
         disp("No valid files found. Abort")
     else
+        
+        new_folder=string(dir_name)+"/csv_report";
+        mkdir(new_folder)
+        cd(new_folder)
+    
         annotation=annotation_array{max_index};
 
         for j = 1:length(sample_name_array)
@@ -52,7 +60,7 @@ function analyze_data_across_conditions_SW(SampleList,dir_name)
 
         matrix=cell2mat(data_table');
 
-        cd(dir_name)
+        %cd(dir_name)
         writematrix(matrix,'result.csv')
 
         fid = fopen('variable_names.txt','w');
