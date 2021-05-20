@@ -173,14 +173,16 @@ function analyze_CARLIN(fastq_file, cfg_type, outdir, varargin)
     else
         save(sprintf('%s/Summary.mat', params.Results.outdir), 'summary', 'thresholds', 'params', 'ref_CBs');
     end
-        
-    try
-        save(sprintf('%s/Analysis.mat', params.Results.outdir));
-    catch
-        save(sprintf('%s/Analysis.mat', params.Results.outdir), '-v7.3', '-nocompression');
-    end
-    gzip(sprintf('%s/Analysis.mat', params.Results.outdir));
-    delete(sprintf('%s/Analysis.mat', params.Results.outdir));
+
+    
+    %% This step is resource intensive, and not very useful
+%     try
+%         save(sprintf('%s/Analysis.mat', params.Results.outdir));
+%     catch
+%         save(sprintf('%s/Analysis.mat', params.Results.outdir), '-v7.3', '-nocompression');
+%     end
+%     gzip(sprintf('%s/Analysis.mat', params.Results.outdir));
+%     delete(sprintf('%s/Analysis.mat', params.Results.outdir));
     
     generate_text_output(summary, params, thresholds, params.Results.outdir);
     
