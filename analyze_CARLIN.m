@@ -131,58 +131,66 @@ function analyze_CARLIN(fastq_file, cfg_type, outdir, varargin)
         mkdir(params.Results.outdir);        
     end
 
-    % Make FQ representation
-    if (strcmp(cfg.type, 'Bulk'))    
-        FQ = BulkFastQData(params.Results.fastq_file, cfg);
+    
+    if isfile(params.Results.outdir+"/Summary.mat")
+        fprintf('Use pre-comupted Summary.mat----------------------------\n')
+        load(sprintf('%s/Summary.mat', params.Results.outdir))
     else
-        ref_CBs = get_SC_ref_BCs(params.Results.ref_CB_file);
-        FQ = SCFastQData(params.Results.fastq_file, cfg);                         
-    end
+        fprintf('generate Summary from scratch-------------------------\n')
+        % Make FQ representation
+        if (strcmp(cfg.type, 'Bulk'))    
+            FQ = BulkFastQData(params.Results.fastq_file, cfg);
+        else
+            ref_CBs = get_SC_ref_BCs(params.Results.ref_CB_file);
+            FQ = SCFastQData(params.Results.fastq_file, cfg);                         
+        end
 
-    % Align unique sequences
-    aligned = AlignedSEQDepot(FQ.get_SEQs());
-    aligned.sanitize_prefix_postfix();
-    aligned.sanitize_conserved_regions();
-    
-    % Make CB collection and call alleles
-    if (strcmp(cfg.type, 'Bulk'))
-        tag_collection = BulkUMICollection.FromFQ(FQ);
-        [tag_collection_denoised, tag_denoise_map] = tag_collection.denoise(aligned);
-        %thresholds=struct('one_tenth_99_pctl', 1, 'max_molecules', 1, 'equal_partition', 0, 'err_floor', 1, 'read_floor', 1, 'override', NaN, 'chosen', 3);
-        %params.Results.read_override_UMI_denoised=3;
-        thresholds = tag_collection_denoised.compute_thresholds(params, FQ);
-        tag_called_allele = tag_collection_denoised.call_alleles(thresholds.chosen, aligned);
-        summary = BulkExperimentReport(tag_collection_denoised, tag_denoise_map, tag_called_allele, FQ, thresholds);
-    else        
-        tag_collection = CBCollection.FromFQ(FQ);
-        [tag_collection_denoised, tag_denoise_map] = tag_collection.denoise(ref_CBs);
-        thresholds = tag_collection_denoised.compute_thresholds(params, FQ, length(ref_CBs));
-        tag_called_allele = tag_collection_denoised.call_alleles([thresholds.CB.chosen, thresholds.UMI.chosen], aligned);
-        summary = SCExperimentReport(tag_collection_denoised, tag_collection, tag_denoise_map, ...
-                                     tag_called_allele, FQ, thresholds, ref_CBs);
-    end
-    
-    fprintf('Saving results...%d/%d tags edited, %d alleles\n', ...
-        summary.N.eventful_tags, summary.N.called_tags, size(summary.alleles, 1));
-    
-    % Save just summary values needed for further analysis separately, so
-    % they can be opened quickly. Full results saved later, can be big and
-    % clunky to reopen for one-off analysis
-    if (strcmp(cfg.type, 'Bulk'))    
-        save(sprintf('%s/Summary.mat', params.Results.outdir), 'summary', 'thresholds', 'params');
-    else
-        save(sprintf('%s/Summary.mat', params.Results.outdir), 'summary', 'thresholds', 'params', 'ref_CBs');
-    end
+        % Align unique sequences
+        aligned = AlignedSEQDepot(FQ.get_SEQs());
+        aligned.sanitize_prefix_postfix();
+        aligned.sanitize_conserved_regions();
 
+        % Make CB collection and call alleles
+        if (strcmp(cfg.type, 'Bulk'))
+            tag_collection = BulkUMICollection.FromFQ(FQ);
+            [tag_collection_denoised, tag_denoise_map] = tag_collection.denoise(aligned);
+            %thresholds=struct('one_tenth_99_pctl', 1, 'max_molecules', 1, 'equal_partition', 0, 'err_floor', 1, 'read_floor', 1, 'override', NaN, 'chosen', 3);
+            %params.Results.read_override_UMI_denoised=3;
+            thresholds = tag_collection_denoised.compute_thresholds(params, FQ);
+            tag_called_allele = tag_collection_denoised.call_alleles(thresholds.chosen, aligned);
+            summary = BulkExperimentReport(tag_collection_denoised, tag_denoise_map, tag_called_allele, FQ, thresholds);
+        else        
+            tag_collection = CBCollection.FromFQ(FQ);
+            [tag_collection_denoised, tag_denoise_map] = tag_collection.denoise(ref_CBs);
+            thresholds = tag_collection_denoised.compute_thresholds(params, FQ, length(ref_CBs));
+            tag_called_allele = tag_collection_denoised.call_alleles([thresholds.CB.chosen, thresholds.UMI.chosen], aligned);
+            summary = SCExperimentReport(tag_collection_denoised, tag_collection, tag_denoise_map, ...
+                                         tag_called_allele, FQ, thresholds, ref_CBs);
+        end
+
+        fprintf('Saving results...%d/%d tags edited, %d alleles\n', ...
+            summary.N.eventful_tags, summary.N.called_tags, size(summary.alleles, 1));
+
+        % Save just summary values needed for further analysis separately, so
+        % they can be opened quickly. Full results saved later, can be big and
+        % clunky to reopen for one-off analysis
+        if (strcmp(cfg.type, 'Bulk'))    
+            save(sprintf('%s/Summary.mat', params.Results.outdir), 'summary', 'thresholds', 'params');
+        else
+            save(sprintf('%s/Summary.mat', params.Results.outdir), 'summary', 'thresholds', 'params', 'ref_CBs');
+        end
+
+
+        %% This step is resource intensive, and not very useful
+    %     try
+    %         save(sprintf('%s/Analysis.mat', params.Results.outdir));
+    %     catch
+    %         save(sprintf('%s/Analysis.mat', params.Results.outdir), '-v7.3', '-nocompression');
+    %     end
+    %     gzip(sprintf('%s/Analysis.mat', params.Results.outdir));
+    %     delete(sprintf('%s/Analysis.mat', params.Results.outdir));
     
-    %% This step is resource intensive, and not very useful
-%     try
-%         save(sprintf('%s/Analysis.mat', params.Results.outdir));
-%     catch
-%         save(sprintf('%s/Analysis.mat', params.Results.outdir), '-v7.3', '-nocompression');
-%     end
-%     gzip(sprintf('%s/Analysis.mat', params.Results.outdir));
-%     delete(sprintf('%s/Analysis.mat', params.Results.outdir));
+    end
     
     generate_text_output(summary, params, thresholds, params.Results.outdir);
     
