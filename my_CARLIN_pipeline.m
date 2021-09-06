@@ -37,12 +37,7 @@ function my_CARLIN_pipeline(DataList,data_Type,data_dir,outdir_name,read_cutoff_
         mkdir(output_dir)
         sample_dir=sample_name+".trimmed.pear.assembled.fastq";
 
-	if ~isfile(output_dir+"/Summary.mat")
-           fprintf('generate Summary from scratch--------------------------')
-           analyze_CARLIN(char(sample_dir),char(sample_type), char(output_dir),'read_override_UMI_denoised',read_cutoff_override,'read_cutoff_UMI_denoised',read_cutoff_floor);
-	else
-           fprintf('Use pre-comupted Summary.mat----------------------------')
-	end
+        analyze_CARLIN(char(sample_dir),char(sample_type), char(output_dir),'read_override_UMI_denoised',read_cutoff_override,'read_cutoff_UMI_denoised',read_cutoff_floor);
 
         cd(data_dir)
         cd(output_dir)
