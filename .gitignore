@@ -6,3 +6,4 @@ my_data/
 cfg/*txt.gz
 slurm*
 log/
+.DS_Store
