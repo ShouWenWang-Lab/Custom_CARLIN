@@ -7,3 +7,4 @@ cfg/*txt.gz
 slurm*
 log/
 .DS_Store
+@CARLIN_def/CARLIN_def.m

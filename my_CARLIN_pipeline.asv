@@ -60,7 +60,8 @@ function my_CARLIN_pipeline(DataList,data_Type,data_dir,outdir_name,read_cutoff_
         file_name="plot_indel_freq_vs_length.eps";
         print('-depsc2','-painters',file_name);
 
-        % This is works for Tigre CARLIN data
+        % this is not working for the Tigre carlin data
+        % This is works for Tigre 
         close all
         plot_site_decomposition(summary, true, 'Eyeball', '# of Transcripts')
         file_name="plot_site_decomposition.eps";

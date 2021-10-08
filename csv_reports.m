@@ -1,5 +1,5 @@
-function analyze_data_across_conditions_SW(SampleList,dir_name)
-
+function csv_reports(SampleList,dir_name)
+% the previous name: analyze_data_across_conditions_SW
 
     install_CARLIN
     %% start the analysis

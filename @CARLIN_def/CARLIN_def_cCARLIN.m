@@ -1,6 +1,6 @@
 classdef (Sealed) CARLIN_def < handle
         
-    %% CARLIN Sequence
+    %% CARLIN Sequence: cCARLIN
     properties (Constant, GetAccess=private)
         segments = {'GACTGCACGACAGTCGACGA';
                     'GACACGACTCGCGCATACGA';

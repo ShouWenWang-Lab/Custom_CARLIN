@@ -1,5 +1,5 @@
 classdef (Sealed) CARLIN_def < handle        
-    %% CARLIN Sequence
+    %% CARLIN Sequence: Tigre CARLIN
     properties (Constant, GetAccess=private)
         segments = {'TAGTCGACGAGCGCGCTCTCGCTC';
                     'TCGTCTGCGTGCTACGTATCGACT';
