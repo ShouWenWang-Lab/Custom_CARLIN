@@ -1,10 +1,14 @@
-function output_all_from_summary(SampleList,dir_name)
+function output_all_from_summary(SampleList,input_dir,template)
 
+    %% Note
+    % we assume that the current dir is where Custom_CARLIN is
+    % currently support variables: 'template', 'read_cutoff_override', 'read_cutoff_floor'
+    switch_template(template)
+    curr_dir=pwd;
     install_CARLIN
+    
     %% start the analysis
     sample_name_array=split(SampleList,',');
-
-    curr_dir=pwd;
     for j = 1:length(sample_name_array)
 
         %% prepare file and folder
@@ -12,7 +16,7 @@ function output_all_from_summary(SampleList,dir_name)
         sample_name=sample_name_array(j);
         disp("Current sample: "+sample_name)
         
-        output_dir=dir_name+"/"+sample_name;
+        output_dir=input_dir+"/"+sample_name;
         mkdir(output_dir)
         cd(output_dir)
         %%% plotting

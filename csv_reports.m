@@ -1,7 +1,13 @@
-function csv_reports(SampleList,dir_name)
-% the previous name: analyze_data_across_conditions_SW
+function csv_reports(SampleList,input_dir,template)
+    % the previous name: analyze_data_across_conditions_SW
 
+    %% Note
+    % we assume that the current dir is where Custom_CARLIN is
+    % currently support variables: 'template', 'read_cutoff_override', 'read_cutoff_floor'
+    switch_template(template)
+    cur_dir=pwd;
     install_CARLIN
+    
     %% start the analysis
     sample_name_array=split(SampleList,',');
 
@@ -15,7 +21,7 @@ function csv_reports(SampleList,dir_name)
         sample_name=sample_name_array(j);
         disp("Current sample: "+sample_name)
         
-        output_dir=dir_name+"/"+sample_name;%+"_mo_v1_autoThresh3";
+        output_dir=input_dir+"/"+sample_name;%+"_mo_v1_autoThresh3";
         mkdir(output_dir)
         cd(output_dir)
         %%% plotting
@@ -45,7 +51,7 @@ function csv_reports(SampleList,dir_name)
         disp("No valid files found. Abort")
     else
         
-        new_folder=string(dir_name)+"/csv_report";
+        new_folder=string(input_dir)+"/csv_report";
         mkdir(new_folder)
         cd(new_folder)
     
@@ -60,7 +66,7 @@ function csv_reports(SampleList,dir_name)
 
         matrix=cell2mat(data_table');
 
-        %cd(dir_name)
+        %cd(input_dir)
         writematrix(matrix,'result.csv')
 
         fid = fopen('variable_names.txt','w');
@@ -85,4 +91,13 @@ function csv_reports(SampleList,dir_name)
         fclose(fid);
 
     end
+    cd(cur_dir)
+    system("python generate_csv.py --path "+new_folder)
+    delete(new_folder+"/result.csv")
+    delete(new_folder+"/result_2.csv")
+    delete(new_folder+"/sample_names.txt")
+    delete(new_folder+"/variable_names.txt")
+    
+    
+    
     

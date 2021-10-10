@@ -1,0 +1,16 @@
+OFF-TARGET AMPLIFICATION
+
+Insignificant off-target amplification detected. Only 1% of reads are off-target.
+
+FILTERING
+
+Sequencing depth insufficent. Low number of reads detected in FASTQ.
+
+ANALYSIS
+
+Number of common UMIs is low (207). Common UMIs account for only 7% of reads. This is likely due to:
+ - low sequencing depth so that many UMIs do not exceed the required threshold
+
+RESULTS
+
+Template allele was not the most common allele. Since significant preferential amplification of short sequences was not detected and most common UMIs called alleles successfully, this may indicate over-exposure to +Dox as most alleles are highly degraded
