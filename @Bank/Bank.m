@@ -84,7 +84,7 @@ classdef Bank
             
             % 1. Pool samples to make the bank
             
-            fprintf('Pooling alleles for bank\n');
+            fprintf('1. Pooling alleles for bank\n');
             
             obj.sample_names = sample_names;
             [obj.summary, obj.sample_map, obj.allele_breakdown_by_sample] = ExperimentSummary.FromMerge(samples);
@@ -92,11 +92,11 @@ classdef Bank
             if (~exist(outdir, 'dir'))
                 mkdir(outdir);               
             end            
-            plot_summary(obj.summary, outdir);
+            %plot_summary(obj.summary, outdir);
             
             % 2. Compute extensive and intensive Poisson rates for observed
             % alleles
-
+            fprintf('2. Compute extensive and intensive Poisson rates for observed alleles\n');
             is = strcmp(cellfun(@(x) degap(x.get_seq), obj.summary.alleles, 'un', false), CARLIN_def.getInstance.seq.CARLIN);
             model.transcripts.edited = sum(obj.summary.allele_freqs(~is));
             model.extensive.rates = obj.summary.allele_freqs;
@@ -106,7 +106,7 @@ classdef Bank
             
             % 3. Tabulate frequency distribution for CatchAll input
             
-            fprintf('Fitting abundance distribution with CatchAll...\n');
+            fprintf('3. Fitting abundance distribution with CatchAll...\n');
             
             if (all(is))                
                 return;
@@ -114,7 +114,7 @@ classdef Bank
             
             [model.obs.freqs, ~, model.obs.freq_counts] = find(accumarray(obj.summary.allele_freqs(~is),1));
             
-            catchall_subdir = [outdir '/CatchAll'];
+            catchall_subdir = outdir + '/CatchAll';
             if (~exist(catchall_subdir, 'dir'))
                 mkdir(catchall_subdir);                
             end            
@@ -126,7 +126,6 @@ classdef Bank
             end
             fclose(fid);
             assert(exist(catchall_input_file, 'file')==2);            
-            prog = Bank.getCatchAllPath();            
 
             if (ispc)
                 % Windows version of CatchAll is finnicky about slashes :S
@@ -135,11 +134,13 @@ classdef Bank
             end
             
             % 4. Run CatchAll
+            fprintf('4. Run CatchAll (this step will not perform) \n'); 
+            % prog = Bank.getCatchAllPath();
             
-            system([prog ' ' catchall_input_file ' ' catchall_subdir]);
+            % system([prog ' ' catchall_input_file ' ' catchall_subdir]);
             
             % 5. Fetch the best fit model name
-            
+            fprintf('5. Fetch the best fit model name\n')
             catchall_output_file = sprintf('%s/FrequencyCounts_BestModelsAnalysis.csv', catchall_subdir);
             
             if (~exist(catchall_output_file, 'file'))
@@ -161,7 +162,7 @@ classdef Bank
             model.transcripts.cutoff = sum(obj.summary.allele_freqs(obj.summary.allele_freqs <= model.extensive.cutoff));
             
             % 6. Fetch the fitted frequencies from the best fit model
-            
+            fprintf('6. Fetch the fitted frequencies from the best fit model\n')
             in = cellfun(@(x) strsplit(x,',', 'CollapseDelimiters', false), ...
                  splitlines(fileread(sprintf('%s/FrequencyCounts_BestModelsFits.csv', catchall_subdir))), 'un', false);
             in = in(1:end-1);
@@ -172,7 +173,7 @@ classdef Bank
             model.fit.freq_counts = cellfun(@(x) str2double(x{3}), in(2:Tau+1));
             
             % 7. Grab the parameters and estimate from the best fit model.
-            
+            fprintf('7. Grap the parameters and estimate from the best fit model\n')
             in = cellfun(@(x) strsplit(x,',', 'CollapseDelimiters', false), ...
                  splitlines(fileread(sprintf('%s/FrequencyCounts_Analysis.csv', catchall_subdir))), 'un', false);
             
@@ -216,14 +217,14 @@ classdef Bank
             % obtain a different Poisson rate, when testing against a
             % sample with a different number of observations, so do some
             % rescaling here.
-            
+            fprintf('8. Rescale to get intensive parameters\n')
             N_terms = length(model.extensive.theta)/2;            
             model.intensive.cutoff = model.extensive.cutoff / model.transcripts.edited;
             model.intensive.theta  = model.extensive.theta;
             model.intensive.theta(1:N_terms) = model.intensive.theta(1:N_terms) / model.transcripts.edited;
             
             % 9. Compute useful PDFs and CDFs
-            
+            fprintf('9. Compute useful PDFs and CDFs\n')
             if (contains(model.name, 'Exp'))
                 
                 model.extensive.exp_coeff = model.extensive.theta(1:N_terms);
@@ -284,7 +285,7 @@ classdef Bank
             %                  = integral [ lambda * P( X = 0 | lambda ) * P(lambda) dlambda ] /
             %                    integral [          P( X = 0 | lambda ) * P(lambda) dlambda ]
             
-            
+            fprintf('10. Compute unobserved rate\n')
             model.extensive.mean_unobs_rate = integral(@(x) x.*exp(-x).*model.extensive.rate_pdf(x), 0, max(model.extensive.rates)+1) / ...
                                               integral(@(x)    exp(-x).*model.extensive.rate_pdf(x), 0, max(model.extensive.rates)+1);
             
