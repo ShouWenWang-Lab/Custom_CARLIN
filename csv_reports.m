@@ -1,11 +1,17 @@
-function csv_reports(SampleList,input_dir,template)
+function csv_reports(SampleList,input_dir,template,varargin)
     % the previous name: analyze_data_across_conditions_SW
 
     %% Note
     % we assume that the current dir is where Custom_CARLIN is
     % currently support variables: 'template', 'read_cutoff_override', 'read_cutoff_floor'
     switch_template(template)
+    p0 = inputParser;
+    p0.addParameter('CARLIN_dir','.');
+    p0.parse(varargin{:});
+    res=p0.Results;
+
     cur_dir=pwd;
+    cd(res.CARLIN_dir)
     install_CARLIN
     
     %% start the analysis
@@ -51,8 +57,9 @@ function csv_reports(SampleList,input_dir,template)
         disp("No valid files found. Abort")
     else
         
-        new_folder=string(input_dir)+"/csv_report";
-        mkdir(new_folder)
+        %new_folder=string(input_dir)+"/csv_report";
+        %mkdir(new_folder)
+        new_folder=string(input_dir);
         cd(new_folder)
     
         annotation=annotation_array{max_index};

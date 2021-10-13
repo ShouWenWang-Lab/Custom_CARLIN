@@ -11,3 +11,4 @@ log/
 */**/.DS_Store
 @CARLIN_def/CARLIN_def.m
 *.asv
+tests/Tigre_Carlin_test/output/test_Tigre_Carlin/

@@ -1,10 +1,18 @@
-function output_all_from_summary(SampleList,input_dir,template)
+function output_all_from_summary(SampleList,input_dir,template,varargin)
 
     %% Note
     % we assume that the current dir is where Custom_CARLIN is
     % currently support variables: 'template', 'read_cutoff_override', 'read_cutoff_floor'
     switch_template(template)
-    curr_dir=pwd;
+    p0 = inputParser;
+    p0.addParameter('read_cutoff_override',NaN);
+    p0.addParameter('read_cutoff_floor',10);
+    p0.addParameter('CARLIN_dir','.');
+    p0.parse(varargin{:});
+    res=p0.Results;
+
+    cur_dir=pwd;
+    cd(res.CARLIN_dir)
     install_CARLIN
     
     %% start the analysis
@@ -73,7 +81,7 @@ function output_all_from_summary(SampleList,input_dir,template)
 
         end
     end
-    cd(curr_dir)
+    cd(cur_dir)
     
     
 

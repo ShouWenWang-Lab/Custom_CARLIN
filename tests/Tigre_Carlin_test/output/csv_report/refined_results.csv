@@ -1,2 +1,0 @@
-,sample,tot_fastq_N,edit_read_fraction,read_threshold,UMI_eventful,UMI_called,Mean_read_per_edited_UMI,Mean_read_per_unedited_UMI,edit_UMI_fraction,total_alleles,singleton,effective_allele_N,Diversity_index_all,Diversity_index_edited,CARLIN_potential_by_UMI,CARLIN_potential_by_allel,ins_del_ratio_ratio_by_eventful_UMI,ins_del_ratio_by_allele,ave_insert_len,ave_del_len,source
-0,test_Tigre_Carlin,10000,6.21,3,190,195,3.45,3,97,123,104,79,0.40,0.41,1.19,1.19,0.28,0.37,4.34,171.15,te

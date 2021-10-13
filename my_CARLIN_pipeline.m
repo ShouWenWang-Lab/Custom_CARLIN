@@ -7,10 +7,12 @@ function my_CARLIN_pipeline(SampleList,cfg_type,input_dir,output_dir,template,va
     p0 = inputParser;
     p0.addParameter('read_cutoff_override',NaN);
     p0.addParameter('read_cutoff_floor',10);
+    p0.addParameter('CARLIN_dir','.');
     p0.parse(varargin{:});
     res=p0.Results;
 
     cur_dir=pwd;
+    cd(res.CARLIN_dir)
     install_CARLIN
     
     %% start the analysis
@@ -73,5 +75,10 @@ function my_CARLIN_pipeline(SampleList,cfg_type,input_dir,output_dir,template,va
         saveas(gcf,file_name)
 
     end
+    
+    % write a file to indicate that the job is done
+    fileID = fopen('CARLIN_analysis.done','w');
+    fprintf(fileID,'Done');
+    fclose(fileID);
     
     cd(cur_dir) % return to original dir
