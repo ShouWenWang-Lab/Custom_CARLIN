@@ -92,8 +92,7 @@ function csv_reports(SampleList,input_dir,template,varargin)
 
         fid = fopen('sample_names.txt','w');
         for jj = 1 : size(sample_name_array, 1)
-          fprintf( fid, sample_name_array(jj) );
-          fprintf( fid, '\n' );
+          fprintf( fid, '%s\n',sample_name_array{jj} );
         end
         fclose(fid);
 
