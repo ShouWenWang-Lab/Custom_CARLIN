@@ -77,7 +77,7 @@ function my_CARLIN_pipeline(SampleList,cfg_type,input_dir,output_dir,template,va
     end
     
     % write a file to indicate that the job is done
-    fileID = fopen('CARLIN_analysis.done','w');
+    fileID = fopen('CARLIN_analysis_actually.done','w');
     fprintf(fileID,'Done');
     fclose(fileID);
     

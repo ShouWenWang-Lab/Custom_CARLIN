@@ -1,4 +1,4 @@
-function [merged_summary,sample_map,allele_breakdown_by_sample]=Customized_merger(samples)
+function [merged_summary,sample_map,allele_breakdown_by_sample]=Customized_merger_SW(samples)
 
     [merged, sample_map, allele_breakdown_by_sample]=ExperimentSummary.FromMerge(samples);
     
