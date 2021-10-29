@@ -3,8 +3,9 @@ function [result,annotation]=return_summary_SW(summary,params,thresholds)
     %load Summary.mat
     %% reads
     tot_fastq_N=double(summary.reads.in_fastq);
-    %common_UMI(i,j)=summary.reads.common_tags/double(summary.reads.in_fastq)*100;
-    edit_read_fraction=summary.reads.eventful_tags_allele/double(summary.reads.in_fastq)*100;        
+    %common_UMI(i,j)=summary.reads.common_tags/double(summary.reads.in_fastq)*100;    
+    %edit_read_fraction=summary.reads.eventful_tags_allele/double(summary.reads.in_fastq)*100;
+    edit_read_fraction=summary.reads.eventful_tags_total/double(summary.reads.called_tags_total)*100;
 
     %% UMI coverage
     x1=summary.reads.eventful_tags_total;
@@ -13,7 +14,7 @@ function [result,annotation]=return_summary_SW(summary,params,thresholds)
     UMI_called=summary.N.called_tags;
     Mean_read_per_edited_UMI=x1/UMI_eventful;
     Mean_read_per_unedited_UMI=(x2-x1)/(UMI_called-UMI_eventful);
-    edit_UMI_fraction=max(round(summary.N.eventful_tags/summary.N.called_tags*100),0);
+    edit_UMI_fraction=max(summary.N.eventful_tags/double(summary.N.called_tags)*100,0);
 
 
 
