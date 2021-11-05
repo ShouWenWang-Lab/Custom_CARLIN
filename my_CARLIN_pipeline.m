@@ -73,6 +73,13 @@ function my_CARLIN_pipeline(SampleList,cfg_type,input_dir,output_dir,template,va
         plot_stargate.create(summary)
         file_name="plot_stargate.png";
         saveas(gcf,file_name)
+        
+        allele_freqs=summary.allele_freqs;
+        mut_list = cellfun(@(x) Mutation.identify_Cas9_events(x), summary.alleles, 'un', false); 
+        AlleleAnnotation = cellfun(@(x) arrayfun(@(i) x(i).annotate(true), [1:size(x,1)], 'un', false), mut_list, 'un', false);
+        AlleleAnnotation = cellfun(@(x) strjoin(x,','), AlleleAnnotation, 'un', false);
+        AlleleAnnotation(cellfun(@isempty, AlleleAnnotation)) = {'[]'};
+        save(sprintf("%s/allele_annotation.mat", output_dir),"allele_freqs","AlleleAnnotation");
 
     end
     

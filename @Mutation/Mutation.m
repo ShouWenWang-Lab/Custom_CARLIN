@@ -180,7 +180,8 @@ classdef Mutation
                 mkdir(folder);        
             end
             
-            fid = fopen([folder '/' filename], 'wt');
+            %fid = fopen([folder '/' filename], 'wt');
+            fid = fopen(folder+'/'+filename, 'wt');
             
             if (~isempty(mut_list))            
                 if (isa(mut_list{1}, 'AlignedSEQ'))

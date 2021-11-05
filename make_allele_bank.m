@@ -33,12 +33,22 @@ function make_allele_bank(SampleList,input_dir,template,varargin)
     bank = Bank.Create(transpose(sample_list), transpose(sample_info), output_dir);
     
     
+    
+%     [summary,sample_map,allele_breakdown_by_sample]=Customized_merger_SW(transpose(sample_list));
+%     params=temp_data.params;
+%     thresholds=temp_data.thresholds;
+%     save(sprintf("%s/Summary.mat", output_dir), "summary","params","thresholds");
+    sample_map=bank.sample_map;
+    sample_names=bank.sample_names;
+    allele_breakdown_by_sample=bank.allele_breakdown_by_sample;
+    
+    save(sprintf("%s/allele_breakdown_by_sample.mat", output_dir),"sample_map", "allele_breakdown_by_sample","sample_names");
 
-    [summary,sample_map,allele_breakdown_by_sample]=Customized_merger_SW(transpose(sample_list));
-    params=temp_data.params;
-    thresholds=temp_data.thresholds;
-    save(sprintf("%s/Summary.mat", output_dir), "summary","params","thresholds");
-    save(sprintf("%s/allele_breakdown_by_sample.mat", output_dir),"sample_map", "allele_breakdown_by_sample","SampleList");
-    %output_all_from_summary("merge_all",input_dir,template) %% need to check whether it is experimental object. Too much. 
+    allele_freqs=bank.summary.allele_freqs;
+    mut_list = cellfun(@(x) Mutation.identify_Cas9_events(x), bank.summary.alleles, 'un', false); 
+    AlleleAnnotation = cellfun(@(x) arrayfun(@(i) x(i).annotate(true), [1:size(x,1)], 'un', false), mut_list, 'un', false);
+    AlleleAnnotation = cellfun(@(x) strjoin(x,','), AlleleAnnotation, 'un', false);
+    AlleleAnnotation(cellfun(@isempty, AlleleAnnotation)) = {'[]'};
+    save(sprintf("%s/allele_annotation.mat", output_dir),"allele_freqs","AlleleAnnotation");
     
     cd(cur_dir)
