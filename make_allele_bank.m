@@ -33,11 +33,11 @@ function make_allele_bank(SampleList,input_dir,template,varargin)
     bank = Bank.Create(transpose(sample_list), transpose(sample_info), output_dir);
     
     
-    
-%     [summary,sample_map,allele_breakdown_by_sample]=Customized_merger_SW(transpose(sample_list));
-%     params=temp_data.params;
-%     thresholds=temp_data.thresholds;
-%     save(sprintf("%s/Summary.mat", output_dir), "summary","params","thresholds");
+    % this step is insufficient, but necessary. bank.summary does not contain information like reads etc. 
+   [summary,sample_map,allele_breakdown_by_sample]=Customized_merger_SW(transpose(sample_list));
+    params=temp_data.params;
+    thresholds=temp_data.thresholds;
+    save(sprintf("%s/Summary.mat", output_dir), "summary","params","thresholds");
     sample_map=bank.sample_map;
     sample_names=bank.sample_names;
     allele_breakdown_by_sample=bank.allele_breakdown_by_sample;
