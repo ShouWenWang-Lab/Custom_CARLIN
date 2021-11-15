@@ -17,4 +17,4 @@ tests/Tigre_Carlin_test/output/test_Tigre_Carlin/
 **/.ipynb_checkpoints/
 */*/.ipynb_checkpoints/
 tests/Tigre_Carlin_test/output*
-
+/**/__MACOSX
