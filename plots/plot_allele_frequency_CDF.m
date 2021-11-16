@@ -35,10 +35,10 @@ function sp = plot_allele_frequency_CDF(summary, title_str)
     set(gca, 'LineWidth', 1.0);
     set(gca, 'TickDir', 'out');
     
-    left_margin = 0.7;
+    left_margin = 0.9;
     top_margin = 0.3;    
     bottom_margin = 0.7;        
-    right_margin = 0.7;        
+    right_margin = 0.9;        
     
     set(sp, 'Units', 'centimeters', 'Position', [left_margin, bottom_margin, fig_width-left_margin-right_margin fig_height-top_margin-bottom_margin]);
 

@@ -184,7 +184,7 @@ function suspect_alleles = plot_diagnostic(cfg, FQ, aligned, tag_collection_deno
         if (~exist(outdir, 'dir'))
             mkdir(outdir);
         end
-        print(fig, sprintf('%s/Diagnostic.png', outdir), '-dpng','-r0');
+        print(fig, sprintf('%s/Diagnostic.png', outdir), '-dpng','-r0',['-r' num2str(300)]);
         close;
     end
     

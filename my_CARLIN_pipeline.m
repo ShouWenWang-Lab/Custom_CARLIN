@@ -43,6 +43,7 @@ function my_CARLIN_pipeline(SampleList,cfg_type,input_dir,output_dir,template,va
 
         analyze_CARLIN(char(sample_dir),char(sample_type), char(output_dir),'read_override_UMI_denoised',res.read_cutoff_override,'read_cutoff_UMI_denoised',res.read_cutoff_floor);
 
+        resolution=300;
         cd(output_dir)
         %%% plotting
         load Summary.mat
@@ -51,31 +52,40 @@ function my_CARLIN_pipeline(SampleList,cfg_type,input_dir,output_dir,template,va
         %     file_name="plot_highlighted_alleles.eps";
         %     print('-depsc2','-painters',file_name);
         file_name="highlight_alleles.png";
-        saveas(gcf,file_name)
+        axis tight;
+        print(file_name,'-dpng',['-r' num2str(resolution)]);
+        %saveas(gcf,file_name)
 
         close all
         plot_allele_frequency_CDF(summary, 'Eyeball')
         file_name="plot_allele_frequency_CDF.png";
-        saveas(gcf,file_name)
-        %print('-depsc2','-painters',file_name);
+        axis tight;
+        print(file_name,'-dpng',['-r' num2str(resolution)]);
+        file_name="plot_allele_frequency_CDF.eps";
+        print('-depsc2','-painters',file_name);
 
         close all
         plot_indel_freq_vs_length(summary)
         file_name="plot_indel_freq_vs_length.png";
-        saveas(gcf,file_name)
-        %print('-depsc2','-painters',file_name);
+        axis tight;
+        print(file_name,'-dpng',['-r' num2str(resolution)]);
+        file_name="plot_indel_freq_vs_length.eps";
+        print('-depsc2','-painters',file_name);
 
         % This is works for Tigre CARLIN data
         close all
         plot_site_decomposition(summary, true, 'Eyeball', '# of Transcripts')
         file_name="plot_site_decomposition.png";
-        saveas(gcf,file_name)
-        %print('-depsc2','-painters',file_name);
+        axis tight;
+        print(file_name,'-dpng',['-r' num2str(resolution)]);
+        file_name="plot_site_decomposition.eps";
+        print('-depsc2','-painters',file_name);
 
         close all
         plot_stargate.create(summary)
         file_name="plot_stargate.png";
-        saveas(gcf,file_name)
+        %saveas(gcf,file_name)
+        print(file_name,'-dpng',['-r' num2str(resolution)]);
         
         allele_freqs=summary.allele_freqs;
         mut_list = cellfun(@(x) Mutation.identify_Cas9_events(x), summary.alleles, 'un', false); 

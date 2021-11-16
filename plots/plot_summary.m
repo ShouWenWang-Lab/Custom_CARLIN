@@ -122,7 +122,7 @@ function plot_summary(summary, outdir)
         if (~exist(outdir, 'dir'))
             mkdir(outdir);
         end
-        print(fig, sprintf('%s/Alleles.png', outdir),'-dpng','-r0');
+        print(fig, sprintf('%s/Alleles.png', outdir),'-dpng','-r0',['-r' num2str(300)]);
         close;
     end
 end

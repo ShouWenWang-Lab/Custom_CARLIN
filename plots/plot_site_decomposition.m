@@ -2,7 +2,7 @@ function [sp, breakdown] = plot_site_decomposition(summary, show_legend, title_s
 
     assert(isa(summary, 'ExperimentSummary'));
     
-    left_margin = 0.6;
+    left_margin = 0.9;
     right_margin = 0.1;        
     top_margin = 0.3;
     bottom_margin = 0.6;

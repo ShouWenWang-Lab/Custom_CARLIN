@@ -23,7 +23,7 @@ function [sp, ins_freq, del_freq] = plot_indel_freq_vs_length(summary, allele_br
             fig_width  = 5.8;
             top_margin = 0.1;
         end
-        left_margin = 0.8;
+        left_margin = 0.9;
         bottom_margin = 0.7;        
         right_margin = 0.1;        
         figure('Units', 'centimeters', 'Position', [0, 0, fig_width, fig_height], ...
