@@ -55,19 +55,22 @@ function my_CARLIN_pipeline(SampleList,cfg_type,input_dir,output_dir,template,va
 
         close all
         plot_allele_frequency_CDF(summary, 'Eyeball')
-        file_name="plot_allele_frequency_CDF.eps";
-        print('-depsc2','-painters',file_name);
+        file_name="plot_allele_frequency_CDF.png";
+        saveas(gcf,file_name)
+        %print('-depsc2','-painters',file_name);
 
         close all
         plot_indel_freq_vs_length(summary)
-        file_name="plot_indel_freq_vs_length.eps";
-        print('-depsc2','-painters',file_name);
+        file_name="plot_indel_freq_vs_length.png";
+        saveas(gcf,file_name)
+        %print('-depsc2','-painters',file_name);
 
         % This is works for Tigre CARLIN data
         close all
         plot_site_decomposition(summary, true, 'Eyeball', '# of Transcripts')
-        file_name="plot_site_decomposition.eps";
-        print('-depsc2','-painters',file_name);
+        file_name="plot_site_decomposition.png";
+        saveas(gcf,file_name)
+        %print('-depsc2','-painters',file_name);
 
         close all
         plot_stargate.create(summary)
