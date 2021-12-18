@@ -6,7 +6,7 @@
 		"SecondarySequence": "malformed"
 	},
 	"UMI" : {
-		"length" : 10,
+		"length" : 12,
 		"QC": 30
 	},	
 	"read_perspective" : {
