@@ -1,8 +1,8 @@
 {
 	"type": "Bulk",
 	"trim": {
-		"Primer5": "exact",
-		"Primer3": "ignore",
+		"Primer5": "malformed",
+		"Primer3": "exact",
 		"SecondarySequence": "malformed"
 	},
 	"UMI" : {
@@ -10,7 +10,7 @@
 		"QC": 30
 	},	
 	"read_perspective" : {
-		"ShouldComplement" : "N",
-		"ShouldReverse"	: "N"
+		"ShouldComplement" : "Y",
+		"ShouldReverse"	: "Y"
 	}
 }

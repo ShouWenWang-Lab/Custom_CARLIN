@@ -6,7 +6,7 @@
 		"SecondarySequence": "exact"
 	},
 	"UMI" : {
-		"length" : 12,
+		"length" : 14,
 		"QC": 30
 	},
 	"read_perspective" : {

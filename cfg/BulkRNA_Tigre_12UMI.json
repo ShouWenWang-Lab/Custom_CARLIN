@@ -10,7 +10,7 @@
 		"QC": 30
 	},	
 	"read_perspective" : {
-		"ShouldComplement" : "Y",
-		"ShouldReverse"	: "Y"
+		"ShouldComplement" : "N",
+		"ShouldReverse"	: "N"
 	}
 }

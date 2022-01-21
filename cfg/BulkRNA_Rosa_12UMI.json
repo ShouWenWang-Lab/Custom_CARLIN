@@ -3,14 +3,14 @@
 	"trim": {
 		"Primer5": "malformed",
 		"Primer3": "exact",
-		"SecondarySequence": "malformed"
+		"SecondarySequence": "exact"
 	},
 	"UMI" : {
 		"length" : 12,
 		"QC": 30
 	},	
 	"read_perspective" : {
-		"ShouldComplement" : "Y",
-		"ShouldReverse"	: "Y"
+		"ShouldComplement" : "N",
+		"ShouldReverse"	: "N"
 	}
 }
