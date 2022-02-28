@@ -65,12 +65,13 @@ function my_CARLIN_pipeline(SampleList,cfg_type,input_dir,output_dir,template,va
         print('-depsc2','-painters',file_name);
 
         close all
-        plot_indel_freq_vs_length(summary)
+        [sp, ins_freq, del_freq]= plot_indel_freq_vs_length(summary);
         file_name="plot_indel_freq_vs_length.png";
         axis tight;
         print(file_name,'-dpng',['-r' num2str(resolution)]);
         file_name="plot_indel_freq_vs_length.eps";
         print('-depsc2','-painters',file_name);
+        save(sprintf("%s/indel_freq_vs_length.mat", output_dir), 'ins_freq', 'del_freq');
 
         % This is works for Tigre CARLIN data
         close all
