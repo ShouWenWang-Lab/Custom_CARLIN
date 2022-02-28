@@ -10,6 +10,7 @@ my_CARLIN_pipeline(SampleList,cfg_type,input_dir,output_dir,template,'read_cutof
 %csv_reports(SampleList,output_dir,template)
 
 % SampleList="CC-DNA-test";
-% make_allele_bank(SampleList,output_dir,template)
+%merge_samples(SampleList,output_dir,template)
+make_allele_bank(SampleList,output_dir,template)
 
 cd(input_dir)
