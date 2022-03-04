@@ -1,12 +1,16 @@
 function make_allele_bank(SampleList,input_dir,template,varargin)
-    switch_template(template)
+
+    %% Note
+    % we assume that the current dir is where Custom_CARLIN is
+    % currently support variables: 'template', 'read_cutoff_override', 'read_cutoff_floor'
     p0 = inputParser;
-    p0.addParameter("CARLIN_dir",".");
+    cur_dir=pwd;
+    p0.addParameter("CARLIN_dir",cur_dir);
     p0.parse(varargin{:});
     res=p0.Results;
 
-    cur_dir=pwd;
     cd(res.CARLIN_dir)
+    switch_template(template)
     install_CARLIN
 
     sample_name_array=split(SampleList,",");

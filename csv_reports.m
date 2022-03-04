@@ -3,15 +3,15 @@ function csv_reports(SampleList,input_dir,template,varargin)
 
     %% Note
     % we assume that the current dir is where Custom_CARLIN is
-    % currently support variables: "template", "read_cutoff_override", "read_cutoff_floor"
-    switch_template(template)
+    % currently support variables: 'template', 'read_cutoff_override', 'read_cutoff_floor'
     p0 = inputParser;
-    p0.addParameter("CARLIN_dir",".");
+    cur_dir=pwd;
+    p0.addParameter("CARLIN_dir",cur_dir);
     p0.parse(varargin{:});
     res=p0.Results;
 
-    cur_dir=pwd;
     cd(res.CARLIN_dir)
+    switch_template(template)
     install_CARLIN
     
     %% start the analysis
@@ -104,7 +104,7 @@ function csv_reports(SampleList,input_dir,template,varargin)
 
     end
     cd(cur_dir)
-    system("python generate_csv.py --path "+new_folder)
+    system("python generate_csv.py --path "+"'"+new_folder+"'")
     delete(new_folder+"/result.csv")
     delete(new_folder+"/result_2.csv")
     delete(new_folder+"/sample_names.txt")

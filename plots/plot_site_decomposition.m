@@ -1,4 +1,4 @@
-function [sp, breakdown] = plot_site_decomposition(summary, show_legend, title_str, ylabel_str)
+function [sp, breakdown,mut_types] = plot_site_decomposition(summary, show_legend, title_str, ylabel_str)
 
     assert(isa(summary, 'ExperimentSummary'));
     

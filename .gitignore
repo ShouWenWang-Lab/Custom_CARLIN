@@ -21,4 +21,4 @@ tests/Tigre_Carlin_test/output*
 /**/*.asv
 tests/cCarlin_test/output*
 tests/Rosa_Carlin_test/output*
-
+/**/*.done
