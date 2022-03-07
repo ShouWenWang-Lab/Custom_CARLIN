@@ -1,9 +1,9 @@
 {
 	"type": "Bulk",
 	"trim": {
-		"Primer5": "malformed", 
+		"Primer5": "malformed",
 		"Primer3": "exact",
-		"SecondarySequence": "exact"
+		"SecondarySequence": "malformed"
 	},
 	"UMI" : {
 		"length" : 14,
