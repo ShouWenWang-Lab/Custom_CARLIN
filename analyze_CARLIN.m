@@ -197,17 +197,17 @@ function analyze_CARLIN(fastq_file, cfg_type, outdir, varargin)
         warning('off', 'MATLAB:hg:AutoSoftwareOpenGL');
         plot_summary(summary, params.Results.outdir);
 
-        fprintf('Generating diagnostic plot\n');
-        if (strcmp(cfg.type, 'Bulk'))    
-            suspect_alleles = plot_diagnostic(cfg, FQ, aligned, tag_collection_denoised, tag_denoise_map, tag_called_allele, ...
-                                              summary, thresholds, params.Results.outdir);
-        else
-            suspect_alleles = plot_diagnostic(cfg, FQ, aligned, tag_collection_denoised, tag_denoise_map, tag_called_allele, ...
-                                              summary, thresholds, ref_CBs, params.Results.outdir);
-        end
-        warning('on', 'MATLAB:hg:AutoSoftwareOpenGL');
-
-        generate_warnings(summary, params, suspect_alleles, params.Results.outdir);
+%         fprintf('Generating diagnostic plot\n');
+%         if (strcmp(cfg.type, 'Bulk'))    
+%             suspect_alleles = plot_diagnostic(cfg, FQ, aligned, tag_collection_denoised, tag_denoise_map, tag_called_allele, ...
+%                                               summary, thresholds, params.Results.outdir);
+%         else
+%             suspect_alleles = plot_diagnostic(cfg, FQ, aligned, tag_collection_denoised, tag_denoise_map, tag_called_allele, ...
+%                                               summary, thresholds, ref_CBs, params.Results.outdir);
+%         end
+%         warning('on', 'MATLAB:hg:AutoSoftwareOpenGL');
+% 
+%         generate_warnings(summary, params, suspect_alleles, params.Results.outdir);
 
         fprintf('Pipeline completed in %g seconds\n', toc);
 
