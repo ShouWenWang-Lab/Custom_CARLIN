@@ -15,7 +15,7 @@ classdef (Sealed) CARLIN_def < handle
         prefix = 'GC';
         pam = 'ATGG';
         postfix = 'A';
-        Primer5 = 'CCTAGCCGGGGATCCTCTAGAGTCGAATGTACAAGTAAAGCGGCC';
+        Primer5 = 'ATGTACAAGTAAAGCGGCC'; % old: CCTAGCCGGGGATCCTCTAGAGTCGAATGTACAAGTAAAGCGGCC
         Primer3 = 'TCTAGTTGC';
         SecondarySequence = 'TGGAGTCTGCTGTGTGCCT';
     end
