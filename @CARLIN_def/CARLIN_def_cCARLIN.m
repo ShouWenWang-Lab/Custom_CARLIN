@@ -15,7 +15,7 @@ classdef (Sealed) CARLIN_def < handle
         prefix = 'CGCCG';
         pam = 'TGGAGTC';
         postfix = 'TGGGAGCT';
-        Primer5 = 'GAGCTGTACAAGTAAGCGGC';
+        Primer5 = 'GAGCTGTACAAGTAAGCGGC'; % remember to update obj.match_score.Primer5;
         Primer3 = 'CGACTGTGCCTTCTAGTTGC';
         SecondarySequence = 'AGAATTCTAACTAGAGCTCGCTGATCAGCCT';
     end
