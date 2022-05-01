@@ -21,7 +21,7 @@ output_dir=input_dir+"/output";
 SampleList="test_RC_20220430";
 cd ../.. % Go back to the main directory
 cfg_type="BulkRNA_Rosa_14UMI";
-template='Rosa';
+template='Rosa_v2';
 my_CARLIN_pipeline(SampleList,cfg_type,input_dir,output_dir,template,'read_cutoff_override',1, 'read_cutoff_floor',1)
 cd(input_dir)
 
