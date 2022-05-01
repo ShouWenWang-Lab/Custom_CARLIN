@@ -27,11 +27,11 @@ my_CARLIN_pipeline(SampleList,cfg_type,input_dir,output_dir,template,'read_cutof
 cd(input_dir)
 
 
-input_dir=pwd;
-output_dir=input_dir+"/output";
-SampleList="CC_DNA_poor";
-cd ../.. % Go back to the main directory
-cfg_type="BulkDNA_12UMI";
-template='cCARLIN';
-my_CARLIN_pipeline(SampleList,cfg_type,input_dir,output_dir,template,'read_cutoff_override',1, 'read_cutoff_floor',1)
-cd(input_dir)
+% input_dir=pwd;
+% output_dir=input_dir+"/output";
+% SampleList="CC_DNA_poor";
+% cd ../.. % Go back to the main directory
+% cfg_type="BulkDNA_12UMI";
+% template='cCARLIN';
+% my_CARLIN_pipeline(SampleList,cfg_type,input_dir,output_dir,template,'read_cutoff_override',1, 'read_cutoff_floor',1)
+% cd(input_dir)

@@ -18,8 +18,8 @@
 
 input_dir=pwd;
 output_dir=input_dir+"/output";
-%SampleList="test_TC_20220430";
-SampleList="LL762E9-TC-Mono_S13";
+SampleList="test_TC_20220430";
+%SampleList="LL762E9-TC-Mono_S13";
 cd ../.. % Go back to the main directory
 % cfg_type="BulkRNA_Tigre_14UMI_v2";
 % template='Tigre';
