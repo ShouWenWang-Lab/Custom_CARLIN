@@ -10,7 +10,8 @@ function cfg = parse_config_file(cfg_type)
                                'BulkRNA_Tigre_12UMI';'BulkDNA_Tigre_12UMI';...
                                'BulkRNA_Rosa_12UMI';'BulkDNA_Rosa_12UMI';
                                'BulkRNA_Rosa_14UMI';'BulkDNA_Rosa_14UMI';
-                               'BulkRNA_Tigre_14UMI';'BulkDNA_Tigre_14UMI'}), ...
+                               'BulkRNA_Tigre_14UMI';'BulkDNA_Tigre_14UMI';
+                               'BulkRNA_Tigre_14UMI_v2'}), ...
            'Unrecognized CFG Type');
     
     cfg_file = sprintf('%s/%s.json', folder, cfg_type);
