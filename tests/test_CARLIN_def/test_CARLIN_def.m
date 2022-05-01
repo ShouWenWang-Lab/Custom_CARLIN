@@ -5,22 +5,22 @@ classdef (Sealed) test_CARLIN_def < handle
     
     %% change only below
     
-        segments = {'GCCGGAGTCGAGACGCTGACGAT';
+        segments = {'GCCGGCGAGCGCTATGAGCGACT';
             'AGTCGACACGACTCGCGCATACG';
-            'AGTCGCGAGCGCTATGAGCGACT';
-            'AGTCGATAGTATGCGTACACGCG';
             'AGTCGACTACAGTCGCTACGACG';
             'AGTCGATACGATACGCGCACGCT';
-            'AGTCGCGACTGTACGCACACGCG';
             'AGTCGACTGCACGACAGTCGACG';
             'AGTCGATACGTAGCACGCAGACG';
-            'GAGCGAGAGCGCGCTCGTCGACT'};
-        prefix = 'TC';
+            'GAGCGAGTCGAGACGCTGACGAT';
+            'AGTCGATAGTATGCGTACACGCG';
+            'AGTCGCGACTGTACGCACACGCG';
+            'AGTCGAGAGCGCGCTCGTCGACT'};
+        prefix = 'GC';
         pam = 'ATGG';
         postfix = 'A';
-        Primer5 = 'GCTCGGTACCTCGCGAA'; % remember to update obj.match_score.Primer5;  old: GGGCTTCGAGCTCGGTACCCGGCCGCGCTCGGTACCTCGCGAA; 
+        Primer5 = 'CCTAGCCGGGGATCCTCTAGAGTCGAATGTACAAGTAAAGCGGCC';
         Primer3 = 'TCTAGTTGC';
-        SecondarySequence = 'GTCTTGTCGGTGCCT';
+        SecondarySequence = 'GTCTGCTGTGTGCCT';
         
 %         segments = {'TAGTCGACGAGCGCGCTCTCGCTC';
 %                     'TCGTCTGCGTGCTACGTATCGACT';

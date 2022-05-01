@@ -149,9 +149,9 @@ classdef (Sealed) CARLIN_def < handle
 
         % Empirically derived NUC44 alignment score thresholds to determine
         % a successful match.
-        obj.match_score.Primer5   = 17; % has 17bp
-        obj.match_score.Primer3   = 9; % only has 9bp
-        obj.match_score.SecondarySequence = 16; % the total seq length is 16
+        obj.match_score.Primer5   = length(obj.Primer5)-1; % has 19bp
+        obj.match_score.Primer3   = length(obj.Primer3)-1; % only has 9bp
+        obj.match_score.SecondarySequence = length(obj.SecondarySequence)-1; % the total seq length is 19
 
         open_penalty = cell(obj.N.motifs,1);
         open_penalty(obj.motifs.prefix )  = {10*ones(1, obj.width.prefix)};

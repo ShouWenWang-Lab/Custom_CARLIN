@@ -1,15 +1,18 @@
 
 
 
-%%
-% A lot of redundant definitions here, but helpful to compute
-% them up front once in the singleton definition, rather than
-% repeatedly on the fly later.
-
+%% construct the object
 obj=test_CARLIN_def;
 
+% one way to test whether it works is to call 
+%% obj.seq.CARLIN 
+% after running this, and compare the sequence with the plasmid 
 
 
+%% only change the following part
+
+
+%% % test Tigre 
 % A lot of redundant definitions here, but helpful to compute
 % them up front once in the singleton definition, rather than
 % repeatedly on the fly later.
@@ -145,7 +148,18 @@ obj.sub_score = sub_score(1:4,1:4);
             
             
 
-% % Set counts of different element types
+
+
+
+
+
+
+
+
+
+
+
+%% Set counts of different element types
 % obj.N.segments = size(obj.segments,1);
 % obj.N.pams     = obj.N.segments; % before, obj.N.pams     = obj.N.segments-1; 
 % obj.N.motifs   = 2*obj.N.segments + obj.N.pams + 2;
@@ -284,3 +298,21 @@ obj.sub_score = sub_score(1:4,1:4);
 % 
 % sub_score = nuc44;
 % obj.sub_score = sub_score(1:4,1:4);
+
+
+%% do not change this part
+disp('get the CARLIN sequence')
+obj.seq.CARLIN 
+
+disp('get the whole sequence, including primers')
+% 
+%         prefix = 'GC';
+%         pam = 'ATGG';
+%         postfix = 'A';
+%         Primer5 = 'ATGTACAAGTAAAGCGGCC'; %remember to update obj.match_score.Primer5; old: CCTAGCCGGGGATCCTCTAGAGTCGAATGTACAAGTAAAGCGGCC
+%         Primer3 = 'TCTAGTTGC';
+%         SecondarySequence = 'AGTCTGCTGTGTGCCT';
+%         
+
+string(obj.Primer5)+string(obj.seq.CARLIN)+string(obj.SecondarySequence) + string(obj.Primer3)
+
