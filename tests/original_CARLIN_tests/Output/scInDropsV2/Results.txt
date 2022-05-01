@@ -1,0 +1,81 @@
+INPUT
+
+CfgType:                                                scInDropsV2
+Input FastQ File(s):                                    /Users/shouwenwang/Documents/MATLAB/CARLIN_pipeline/tests/data/InDropsV2.fastq.gz
+Reference barcode file:                                 /Users/shouwenwang/Documents/MATLAB/CARLIN_pipeline/cfg/InDropsV2_barcodes.txt.gz
+Output directory:                                       /Users/shouwenwang/Documents/MATLAB/CARLIN_pipeline/tests/Output/scInDropsV2
+
+READ BREAKDOWN                                               Reads      %
+
+in_fastq:                                                   100000    100
+QC_length_match:                                            100000    100
+CB_correct_length:                                          100000    100
+UMI_correct_length:                                          99968    100
+CB_no_N:                                                     99996    100
+UMI_no_N:                                                   100000    100
+good_CB_UMI_QC:                                              11718     12
+valid_provenance_structure:                                  11704     12
+CARLIN_match:                                                88386     88
+valid_5_primer:                                             100000    100
+valid_3_primer:                                             100000    100
+valid_2_seq:                                                 68331     68
+valid_read_structure:                                        68331     68
+trimmed_SEQ_long_enough:                                     68331     68
+SEQ_no_N:                                                    68322     68
+valid_SEQ_structure:                                         68322     68
+valid_lines:                                                  6280      6
+matched_CBs:                                                  5958      6
+common_CBs:                                                   3507      4
+called_CBs_total:                                             3507      4
+called_CBs_allele:                                            3253      3
+eventful_CBs_total:                                           2445      2
+eventful_CBs_allele:                                          2334      2
+
+THRESHOLDS
+
+CB_one_tenth_99_pctl:                                            6
+CB_max_cells:                                                    2
+CB_equal_partition:                                              1
+CB_err_floor:                                                    1
+CB_read_floor:                                                  10
+CB_override:                                                   NaN
+CB_chosen:                                                      10
+
+UMI_one_tenth_99_pctl:                                           6
+UMI_max_molecules:                                               2
+UMI_equal_partition:                                             0
+UMI_err_floor:                                                   1
+UMI_read_floor:                                                 10
+UMI_override:                                                  NaN
+UMI_chosen:                                                     10
+
+CELL BARCODE BREAKDOWN
+
+reference:                                                  147456
+uncleaned:                                                    1702
+matched:                                                      1545
+cleaned:                                                      1508
+common:                                                         35
+called:                                                         35
+eventful:                                                       24
+
+PREFERENTIAL AMPLIFICATION
+
+Mean reads per edited CB:                                      102
+Mean reads per unedited CB:                                     97
+
+SEQUENCE HETEROGENEITY
+
+Mean % reads in edited CB folded into consensus:                95
+Mean % reads in unedited CB folded into consensus:              87
+
+ALLELES
+
+Total (including template):                                     10
+Singletons (including template):                                 5
+% CBs edited:                                                   69
+Effective Alleles:                                               5
+Diversity Index (normalized by all):                          0.15
+Diversity Index (normalized by edited):                       0.22
+Mean CARLIN potential (by allele):                            5.60
+Mean CARLIN potential (by UMI):                               5.23

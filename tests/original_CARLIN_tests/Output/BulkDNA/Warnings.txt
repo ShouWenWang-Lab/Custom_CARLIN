@@ -1,0 +1,15 @@
+OFF-TARGET AMPLIFICATION
+
+Insignificant off-target amplification detected. Only 1% of reads are off-target.
+
+FILTERING
+
+No issues detected at filtering step.
+
+ANALYSIS
+
+No issues detected during analysis.
+
+RESULTS
+
+Low +Dox induction detected. Only 8% of UMIs reported an edited CARLIN allele.

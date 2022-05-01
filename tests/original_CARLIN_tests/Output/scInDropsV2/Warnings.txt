@@ -1,0 +1,26 @@
+OFF-TARGET AMPLIFICATION
+
+Significant off-target amplification detected: 12% of reads are not CARLIN.
+
+REFERENCE_LIST
+
+Collapsing MiSeq cell barcodes against the platform's reference list may lead to more FPs and FNs.
+
+FILTERING
+
+Sequencing depth insufficent. Low number of reads detected in FASTQ.
+
+Only 12% of reads have usable provenance information (CB or UMI). See Results.txt for a more detailed breakdown of QC issues.
+
+ANALYSIS
+
+Number of common CBs is low (35). Common CBs account for only 56% of reads. This is likely due to:
+ - reads dedicated to FP CBs owing to the inflated reference list used
+ - low sequencing depth so that many CBs do not exceed the required threshold
+ - QC issues with CB/UMI which cause reads to be dedicated to spurious CBs that persist after filtering
+
+RESULTS
+
+Template allele was not the most common allele. This is not because of preferential amplification, low yield in calling alleles among common CBs or over-exposure to +Dox.
+
+For allele(s) 1  4  5, >10% of CB halves or UMIs differ pairwise by only 1bp. This may indicate that that the cell count for these alleles is artificially inflated. This is likely because of QC issues on the CB/UMI reads. This is a known issue with InDrops.

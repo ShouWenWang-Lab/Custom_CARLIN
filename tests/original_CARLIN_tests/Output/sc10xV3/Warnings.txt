@@ -1,0 +1,21 @@
+OFF-TARGET AMPLIFICATION
+
+Insignificant off-target amplification detected. Only 3% of reads are off-target.
+
+REFERENCE_LIST
+
+Collapsing MiSeq cell barcodes against the platform's reference list may lead to more FPs and FNs.
+
+FILTERING
+
+Sequencing depth insufficent. Low number of reads detected in FASTQ.
+
+ANALYSIS
+
+No issues detected during analysis.
+
+RESULTS
+
+Low +Dox induction detected. Only 20% of CBs reported an edited CARLIN allele.
+
+For allele(s) 62, >10% of CB halves or UMIs differ pairwise by only 1bp. This may indicate that that the cell count for these alleles is artificially inflated.

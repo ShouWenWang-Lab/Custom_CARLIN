@@ -1,0 +1,6 @@
+22_23insTC,50_51insCC,77_78insTC,141_186del
+23_24insC,265_266insGT
+22_22delinsCT,41_262del
+202T>G,254_259delinsCCAGCC
+78_245del
+102_275del

@@ -1,0 +1,44 @@
+Writing log to temporary location: /private/var/folders/3s/vnbffyvj54jgksgs1rlzg1_40000gp/T/tp21349baf_0679_4948_906f_f474c165f309.txt
+Parsing CFG file: scInDropsV2.json
+Parsing CB reference list: /Users/shouwenwang/Documents/MATLAB/CARLIN_pipeline/cfg/InDropsV2_barcodes.txt.gz
+Unzipping CB reference file to: /private/var/folders/3s/vnbffyvj54jgksgs1rlzg1_40000gp/T/tp9834990c_db4a_4ae1_98bb_ac6e39ed5bfc/InDropsV2_barcodes.txt
+Removing unzipped CB reference file: /private/var/folders/3s/vnbffyvj54jgksgs1rlzg1_40000gp/T/tp9834990c_db4a_4ae1_98bb_ac6e39ed5bfc/InDropsV2_barcodes.txt
+147456 CBs in reference list
+Parsing FASTQ file: /Users/shouwenwang/Documents/MATLAB/CARLIN_pipeline/tests/data/InDropsV2.fastq.gz
+Unzipping FASTQ file to: /private/var/folders/3s/vnbffyvj54jgksgs1rlzg1_40000gp/T/tp3663ac90_487b_4db2_9290_dbec524180a2/InDropsV2.fastq
+Reads in FASTQ: 100000
+Removing unzipped FASTQ file: /private/var/folders/3s/vnbffyvj54jgksgs1rlzg1_40000gp/T/tp3663ac90_487b_4db2_9290_dbec524180a2/InDropsV2.fastq
+Analyzing SC CBs and UMIs
+From 100000 reads, found good (L_QC,L_CB,L_UMI,QC,no N CB,no N UMI,all) (100000,100000,99968,11718,99996,100000,11704) times
+Trimming CARLIN sequences from reads
+From 100000 reads, found (CARLIN,5,3,control,structure,long,AGCT,all) sequences (88386,100000,100000,68331,68331,68331,68322,68322) times
+Merging filters
+From 100000 reads, found valid (provenance,sequence,both) reads (11704,68322,6280) times
+Creating aligned CARLIN store with 742 sequences
+Sanitizing prefix/postfix of aligned sequences in depot
+...reduced sequence diversity from 742 to 577
+Sanitizing conserved regions of aligned sequences in depot
+...reduced sequence diversity from 577 to 220
+Building CB collection from FastQ with 1702 CBs
+Denoising CB collection
+...(1545/1702) MiSEQ CBs matched to (1508/147456) reference CBs
+Denoising UMIs
+Computing thresholds for CB collection
+...(6,2,1,1,10,NaN,10) reads for (99th pctl/10,max_cells,equal,seq_err,min,override,final)
+...35 common CBs
+...(6,2,0,1,10,NaN,10) reads for (99th pctl/10,max_molecules,equal,seq_err,min,override,final)
+...35 common UMIs
+Calling alleles for CB collection
+...35 CBs callable
+Generating report for SC experiment
+Saving results...24/35 tags edited, 10 alleles
+Generating results file
+    35
+
+normalize by edited
+    24
+
+Generating allele plot
+Generating diagnostic plot
+Generating warnings file
+Pipeline completed in 33.9667 seconds

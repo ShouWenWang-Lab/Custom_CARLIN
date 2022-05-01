@@ -1,0 +1,66 @@
+INPUT
+
+CfgType:                                                BulkRNA
+Input FastQ File(s):                                    /Users/shouwenwang/Documents/MATLAB/CARLIN_pipeline/tests/data/BulkRNA.fastq.gz
+Output directory:                                       /Users/shouwenwang/Documents/MATLAB/CARLIN_pipeline/tests/Output/BulkRNA
+
+READ BREAKDOWN                                               Reads      %
+
+in_fastq:                                                   100000    100
+UMI_correct_length:                                         100000    100
+UMI_good_QC:                                                 97622     98
+UMI_no_N:                                                   100000    100
+valid_provenance_structure:                                  97622     98
+CARLIN_match:                                                96641     97
+valid_5_primer:                                              96826     97
+valid_3_primer:                                              92816     93
+valid_2_seq:                                                 93666     94
+valid_read_structure:                                        89735     90
+trimmed_SEQ_long_enough:                                     89610     90
+SEQ_no_N:                                                    89735     90
+valid_SEQ_structure:                                         89610     90
+valid_lines:                                                 87415     87
+common_UMIs:                                                 45902     46
+called_UMIs_total:                                           43127     43
+called_UMIs_allele:                                          36077     36
+eventful_UMIs_total:                                          8890      9
+eventful_UMIs_allele:                                         7349      7
+
+THRESHOLDS
+
+UMI_one_tenth_99_pctl:                                           3
+UMI_max_molecules:                                               2
+UMI_equal_partition:                                             0
+UMI_err_floor:                                                   1
+UMI_read_floor:                                                 10
+UMI_override:                                                  NaN
+UMI_chosen:                                                     10
+
+UMI BREAKDOWN
+
+uncleaned:                                                   13170
+cleaned:                                                     11201
+common:                                                       3152
+called:                                                       2993
+eventful:                                                      309
+
+PREFERENTIAL AMPLIFICATION
+
+Mean reads per edited UMI:                                      29
+Mean reads per unedited UMI:                                    13
+
+SEQUENCE HETEROGENEITY
+
+Mean % reads in edited UMI folded into consensus:               83
+Mean % reads in unedited UMI folded into consensus:             84
+
+ALLELES
+
+Total (including template):                                    114
+Singletons (including template):                                48
+% UMIs edited:                                                  10
+Effective Alleles:                                              86
+Diversity Index (normalized by all):                          0.03
+Diversity Index (normalized by edited):                       0.28
+Mean CARLIN potential (by allele):                            5.04
+Mean CARLIN potential (by UMI):                               9.39
