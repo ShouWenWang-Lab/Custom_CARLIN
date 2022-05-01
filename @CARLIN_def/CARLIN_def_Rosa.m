@@ -151,7 +151,7 @@ classdef (Sealed) CARLIN_def < handle
             % a successful match.
             obj.match_score.Primer5   = 40; % has 45bp; %length(obj.Primer5)-1
             obj.match_score.Primer3   = length(obj.Primer3)-1; % only has 9bp
-            obj.match_score.SecondarySequence = length(obj.SecondarySequence)-1; % the total seq length is 19
+            obj.match_score.SecondarySequence = length(obj.SecondarySequence)-1; % the total seq length is 15
             
             open_penalty = cell(obj.N.motifs,1);
             open_penalty(obj.motifs.prefix )  = {10*ones(1, obj.width.prefix)};

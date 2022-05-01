@@ -41,7 +41,25 @@ function output_all_from_summary(SampleList,input_dir,template,varargin)
             plot_summary(summary, output_dir);
             
             resolution=300;
+            
+            allele_freqs=summary.allele_freqs;
+            mut_list = cellfun(@(x) Mutation.identify_Cas9_events(x), summary.alleles, 'un', false); 
+            AlleleAnnotation = cellfun(@(x) arrayfun(@(i) x(i).annotate(true), [1:size(x,1)], 'un', false), mut_list, 'un', false);
+            AlleleAnnotation = cellfun(@(x) strjoin(x,','), AlleleAnnotation, 'un', false);
+            AlleleAnnotation(cellfun(@isempty, AlleleAnnotation)) = {'[]'};
+            save(sprintf("%s/allele_annotation.mat", output_dir),"allele_freqs","AlleleAnnotation");
+            
             %%% plotting
+            close all
+            [sp, ins_freq, del_freq]= plot_indel_freq_vs_length(summary);
+            file_name="plot_indel_freq_vs_length.png";
+            axis tight;
+            print(file_name,'-dpng',['-r' num2str(resolution)]);
+            file_name="plot_indel_freq_vs_length.eps";
+            print('-depsc2','-painters',file_name);
+            save(sprintf("%s/indel_freq_vs_length.mat", output_dir), 'ins_freq', 'del_freq');
+
+            
             close all
             plot_highlighted_alleles(summary, length(summary.alleles)-1);
             %     file_name="plot_highlighted_alleles.eps";
@@ -59,15 +77,6 @@ function output_all_from_summary(SampleList,input_dir,template,varargin)
             file_name="plot_allele_frequency_CDF.eps";
             print('-depsc2','-painters',file_name);
 
-            close all
-            [sp, ins_freq, del_freq]= plot_indel_freq_vs_length(summary);
-            file_name="plot_indel_freq_vs_length.png";
-            axis tight;
-            print(file_name,'-dpng',['-r' num2str(resolution)]);
-            file_name="plot_indel_freq_vs_length.eps";
-            print('-depsc2','-painters',file_name);
-            save(sprintf("%s/indel_freq_vs_length.mat", output_dir), 'ins_freq', 'del_freq');
-
             % This works for Tigre CARLIN data
             close all
             [sp, breakdown,mut_types]=plot_site_decomposition(summary, true, 'Eyeball', '# of Transcripts');
@@ -83,13 +92,6 @@ function output_all_from_summary(SampleList,input_dir,template,varargin)
             file_name="plot_stargate.png";
             %saveas(gcf,file_name)
             print(file_name,'-dpng',['-r' num2str(resolution)]);
-
-            allele_freqs=summary.allele_freqs;
-            mut_list = cellfun(@(x) Mutation.identify_Cas9_events(x), summary.alleles, 'un', false); 
-            AlleleAnnotation = cellfun(@(x) arrayfun(@(i) x(i).annotate(true), [1:size(x,1)], 'un', false), mut_list, 'un', false);
-            AlleleAnnotation = cellfun(@(x) strjoin(x,','), AlleleAnnotation, 'un', false);
-            AlleleAnnotation(cellfun(@isempty, AlleleAnnotation)) = {'[]'};
-            save(sprintf("%s/allele_annotation.mat", output_dir),"allele_freqs","AlleleAnnotation");
             
         else
             disp("Warning: Sample"+string(sample_name)+"has not been computed")
