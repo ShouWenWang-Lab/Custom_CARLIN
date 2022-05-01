@@ -15,7 +15,7 @@ classdef (Sealed) CARLIN_def < handle
         prefix = 'TC';
         pam = 'ATGG';
         postfix = 'A';
-        Primer5 = 'GCTCGGTACCTCGCGAA'; % remember to update obj.match_score.Primer5;  old: GGGCTTCGAGCTCGGTACCCGGCCGCGCTCGGTACCTCGCGAA; 
+        Primer5 = 'GGGCTTCGAGCTCGGTACCCGGCCGCGCTCGGTACCTCGCGAA';
         Primer3 = 'TCTAGTTGC';
         SecondarySequence = 'GTCTTGTCGGTGCCT';
     end
@@ -144,7 +144,7 @@ classdef (Sealed) CARLIN_def < handle
             
             % Empirically derived NUC44 alignment score thresholds to determine
             % a successful match.
-            obj.match_score.Primer5   = 15; % has 17bp
+            obj.match_score.Primer5   = 38; % has 43bp
             obj.match_score.Primer3   = 9; % only has 9bp
             obj.match_score.SecondarySequence = 14; % the total seq length is 16
             
