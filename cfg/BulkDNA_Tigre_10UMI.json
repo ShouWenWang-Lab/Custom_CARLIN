@@ -1,0 +1,16 @@
+{
+	"type": "Bulk",
+	"trim": {
+		"Primer5": "malformed",
+		"Primer3": "exact",
+		"SecondarySequence": "malformed"
+	},
+	"UMI" : {
+		"length" : 10,
+		"QC": 30
+	},
+	"read_perspective" : {
+		"ShouldComplement" : "Y",
+		"ShouldReverse"	: "Y"
+	}
+}
