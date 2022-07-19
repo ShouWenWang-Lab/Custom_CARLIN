@@ -3,7 +3,7 @@ Bank.mat.gz
 tests/Output/*
 tests/data/*
 my_data/
-cfg/*txt.gz
+#cfg/*txt.gz
 slurm*
 log/
 .DS_Store
