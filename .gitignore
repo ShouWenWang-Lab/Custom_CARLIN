@@ -22,3 +22,4 @@ tests/Tigre_Carlin_test/output*
 tests/cCarlin_test/output*
 tests/Rosa_Carlin_test/output*
 /**/*.done
+tests/original_CARLIN_tests/Output

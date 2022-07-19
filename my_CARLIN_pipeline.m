@@ -39,7 +39,9 @@ function my_CARLIN_pipeline(SampleList,cfg_type,input_dir,output_dir,template,va
         elseif startsWith(cfg_type,'scLimeCat') % we reverse R1 and R2 here
             fastq_file = {sprintf('%s_L001_R2_001.fastq.gz', sample_name), ...
                   sprintf('%s_L001_R1_001.fastq.gz', sample_name)};
-            analyze_CARLIN(fastq_file,char(sample_type), char(output_dir_1),'read_override_CB_denoised',res.read_cutoff_override,'read_cutoff_CB_denoised',res.read_cutoff_floor);
+            analyze_CARLIN(fastq_file,char(sample_type), char(output_dir_1), ...
+                'read_override_CB_denoised',res.read_cutoff_override,'read_cutoff_CB_denoised',res.read_cutoff_floor, ...
+                'read_override_UMI_denoised',res.read_cutoff_override,'read_cutoff_UMI_denoised',res.read_cutoff_floor);
 
         else
             error('Unsupported scLimeCat version');
