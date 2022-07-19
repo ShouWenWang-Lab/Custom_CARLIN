@@ -31,9 +31,19 @@ function my_CARLIN_pipeline(SampleList,cfg_type,input_dir,output_dir,template,va
         sample_name=sample_name_array(j);
         output_dir_1=output_dir+"/"+sample_name;
         mkdir(output_dir_1)
-        sample_dir=sample_name+".trimmed.pear.assembled.fastq";
 
-        analyze_CARLIN(char(sample_dir),char(sample_type), char(output_dir_1),'read_override_UMI_denoised',res.read_cutoff_override,'read_cutoff_UMI_denoised',res.read_cutoff_floor);
+        if startsWith(cfg_type,'Bulk')
+            sample_dir=sample_name+".trimmed.pear.assembled.fastq";
+
+            analyze_CARLIN(char(sample_dir),char(sample_type), char(output_dir_1),'read_override_UMI_denoised',res.read_cutoff_override,'read_cutoff_UMI_denoised',res.read_cutoff_floor);
+        elseif startsWith(cfg_type,'scLimeCat') % we reverse R1 and R2 here
+            fastq_file = {sprintf('%s_L001_R2_001.fastq.gz', sample_name), ...
+                  sprintf('%s_L001_R1_001.fastq.gz', sample_name)};
+            analyze_CARLIN(fastq_file,char(sample_type), char(output_dir_1),'read_override_CB_denoised',res.read_cutoff_override,'read_cutoff_CB_denoised',res.read_cutoff_floor);
+
+        else
+            error('Unsupported scLimeCat version');
+        end
 
         % summary has been precomputed and saved
         output_all_from_summary(sample_name,output_dir,template,'CARLIN_dir',res.CARLIN_dir)

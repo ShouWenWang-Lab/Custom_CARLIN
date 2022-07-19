@@ -36,6 +36,12 @@ function params = get_parameters(cfg)
             else
                 error('Unsupported 10x version');
             end
+        elseif (strcmp(cfg.SC.Platform, 'scLimeCat'))
+            if (cfg.SC.Version==1)
+                addParameter(params, 'ref_CB_file', sprintf('%s/scLimeCat_barcodes.txt.gz', folder));            
+            else
+                error('Unsupported scLimeCat version');
+            end
         else
             error('Unsupported SingleCell platform');
         end

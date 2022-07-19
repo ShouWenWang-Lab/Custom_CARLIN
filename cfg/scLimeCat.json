@@ -1,0 +1,24 @@
+{
+    "type": "SC",
+    "SC": {
+        "Platform": "scLimeCat",
+        "Version": 1
+    },
+    "trim": {
+        "Primer5": "exact",
+        "Primer3": "ignore",
+        "SecondarySequence": "malformed"
+    },
+    "UMI": {
+        "length": 8
+    },
+    "CB": [
+        {
+            "length": 8
+        }
+    ],
+    "read_perspective": {
+        "ShouldComplement": "N",
+        "ShouldReverse": "N"
+    }
+}
