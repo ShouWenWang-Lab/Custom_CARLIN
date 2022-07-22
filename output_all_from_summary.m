@@ -35,6 +35,16 @@ function output_all_from_summary(SampleList,input_dir,template,varargin)
             save_dir='.';
             generate_text_output(summary, params, thresholds, save_dir);
 
+            % output actual CARLIN sequences
+            fid = fopen(output_dir+"/Actaul_CARLIN_seq.txt","w");
+            for jx = 1:length(summary.alleles)
+                fprintf( fid, summary.alleles{jx}.get_seq);
+                fprintf( fid, "\n" );
+            end
+            fclose(fid);
+
+
+
             fprintf('Generating allele plot\n');
 
             warning('off', 'MATLAB:hg:AutoSoftwareOpenGL');
@@ -92,6 +102,7 @@ function output_all_from_summary(SampleList,input_dir,template,varargin)
             file_name="plot_stargate.png";
             %saveas(gcf,file_name)
             print(file_name,'-dpng',['-r' num2str(resolution)]);
+
             
         else
             disp("Warning: Sample"+string(sample_name)+"has not been computed")
