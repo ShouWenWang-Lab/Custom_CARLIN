@@ -37,12 +37,23 @@
 % cd(input_dir)
 
 
+% %% single-cell test
+% input_dir=pwd;
+% output_dir=input_dir+"/output";
+% SampleList="LL719-P1-CC_S1";
+% cd ../.. % Go back to the main directory
+% cfg_type="scLimeCat";
+% template='cCARLIN';
+% my_CARLIN_pipeline(SampleList,cfg_type,input_dir,output_dir,template,'read_cutoff_UMI_override',2, 'read_cutoff_CB_override',10)
+% cd(input_dir)
+
 %% single-cell test
 input_dir=pwd;
 output_dir=input_dir+"/output";
-SampleList="LL719-P1-CC_S1";
+SampleList="10xV3";
 cd ../.. % Go back to the main directory
-cfg_type="scLimeCat";
+cfg_type="sc10xV3";
 template='cCARLIN';
 my_CARLIN_pipeline(SampleList,cfg_type,input_dir,output_dir,template,'read_cutoff_UMI_override',2, 'read_cutoff_CB_override',10)
 cd(input_dir)
+
