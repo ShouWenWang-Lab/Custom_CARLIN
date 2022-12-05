@@ -71,7 +71,8 @@ function output_all_from_summary(SampleList,input_dir,template,varargin)
 
             
             close all
-            plot_highlighted_alleles(summary, length(summary.alleles)-1);
+            %plot_highlighted_alleles(summary, length(summary.alleles)-1);
+            plot_highlighted_alleles(summary, 200);
             %     file_name="plot_highlighted_alleles.eps";
             %     print('-depsc2','-painters',file_name);
             file_name="highlight_alleles.png";
