@@ -1,3 +1,12 @@
+## Note
+This repository is forked from https://gitlab.com/hormozlab/carlin. The original CARLIN pipeline only deals with a single CARLIN array at the Col1a1 locus (CC array). 
+
+We have extended the CARLIN pipeline to work with 3 CARLIN arrays across Col1a1, Tigre, and Rosa26 loci. The corresponding CARLIN array are named CC, TC, and RC. 
+
+For more detailed instruction on how to use this modified pipeline, please visit https://github.com/ShouWenWangLab/snakemake_carlin for more details. 
+
+Below are documentations from the original CARLIN pipeline. 
+
 # CARLIN Pipeline
 
 The CARLIN pipeline calls alleles from sequencing runs of the CARLIN amplicon. It was written in MATLAB 2019a.
