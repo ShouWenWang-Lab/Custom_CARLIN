@@ -3,9 +3,11 @@ This repository is forked from https://gitlab.com/hormozlab/carlin. The original
 
 We have extended the CARLIN pipeline to work with 3 CARLIN arrays across Col1a1, Tigre, and Rosa26 loci. The corresponding CARLIN array are named CC, TC, and RC. 
 
-For more detailed instruction on how to use this modified pipeline, please visit https://github.com/ShouWenWangLab/snakemake_carlin for more details. 
+For more detailed instruction on how to use this modified pipeline, please visit https://github.com/ShouWenWang-Lab/snakemake_DARLIN for more details. 
 
 Below are documentations from the original CARLIN pipeline. 
+
+---
 
 # CARLIN Pipeline
 
