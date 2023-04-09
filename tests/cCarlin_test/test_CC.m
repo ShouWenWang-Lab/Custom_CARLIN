@@ -42,7 +42,7 @@
 % output_dir=input_dir+"/output";
 % SampleList="LL719-P1-CC_S1";
 % cd ../.. % Go back to the main directory
-% cfg_type="scLimeCat";
+% cfg_type="scCamellia";
 % template='cCARLIN';
 % my_CARLIN_pipeline(SampleList,cfg_type,input_dir,output_dir,template,'read_cutoff_UMI_override',2, 'read_cutoff_CB_override',10)
 % cd(input_dir)

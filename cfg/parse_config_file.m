@@ -12,7 +12,7 @@ function cfg = parse_config_file(cfg_type)
                                'BulkRNA_Rosa_14UMI';'BulkDNA_Rosa_14UMI';
                                'BulkRNA_Tigre_14UMI';'BulkDNA_Tigre_14UMI';
                                'BulkRNA_Tigre_10UMI';'BulkDNA_Tigre_10UMI';
-                               'scLimeCat';
+                               'scCamellia';
                                }), ...
            'Unrecognized CFG Type');
     

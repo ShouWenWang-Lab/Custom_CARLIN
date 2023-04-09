@@ -24,7 +24,7 @@ classdef (Sealed=true) SCFastQData < FastQData
             assert(strcmp(cfg.type, 'SC'), 'Invalid CFG passed function');
             if(strcmp(cfg.SC.Platform, 'InDrops'))
                 [CB, read_CB, UMI, read_UMI, SEQ, read_SEQ, QC, Nreads] = SCFastQData.parse_indrops_fastq(fastq_file);
-            elseif(strcmp(cfg.SC.Platform, '10x') | strcmp(cfg.SC.Platform, 'scLimeCat'))
+            elseif(strcmp(cfg.SC.Platform, '10x') | strcmp(cfg.SC.Platform, 'scCamellia'))
                 [CB, read_CB, UMI, read_UMI, SEQ, read_SEQ, QC, Nreads] = SCFastQData.parse_10x_fastq(fastq_file, cfg);            
             else
                 error('Unsupported SC Platform: %s', cfg.Platform);

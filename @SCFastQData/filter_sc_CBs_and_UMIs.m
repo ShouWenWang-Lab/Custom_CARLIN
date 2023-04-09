@@ -16,7 +16,7 @@ function masks = filter_sc_CBs_and_UMIs(cfg, CB, read_CB, UMI, read_UMI, QC)
                                                    length(x) <= cfg.CB(1).length(2)+cfg.CB(2).length, CB);
         end
         masks.UMI_correct_length = cellfun(@(x) length(x) == cfg.UMI.length, UMI);        
-    elseif(strcmp(cfg.SC.Platform, '10x') | strcmp(cfg.SC.Platform, 'scLimeCat'))
+    elseif(strcmp(cfg.SC.Platform, '10x') | strcmp(cfg.SC.Platform, 'scCamellia'))
         masks.CB_correct_length = cellfun(@(x) length(x) == cfg.CB.length, CB);
         masks.UMI_correct_length = cellfun(@(x) length(x) == cfg.UMI.length, UMI);        
     end

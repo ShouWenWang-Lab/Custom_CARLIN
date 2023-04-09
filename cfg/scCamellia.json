@@ -1,7 +1,7 @@
 {
     "type": "SC",
     "SC": {
-        "Platform": "scLimeCat",
+        "Platform": "scCamellia",
         "Version": 1
     },
     "trim": {

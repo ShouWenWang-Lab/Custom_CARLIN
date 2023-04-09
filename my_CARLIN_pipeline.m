@@ -36,7 +36,7 @@ function my_CARLIN_pipeline(SampleList,cfg_type,input_dir,output_dir,template,va
             sample_dir=sample_name+".trimmed.pear.assembled.fastq";
 
             analyze_CARLIN(char(sample_dir),char(sample_type), char(output_dir_1),'read_override_UMI_denoised',res.read_cutoff_UMI_override);
-        elseif startsWith(cfg_type,'scLimeCat') % we reverse R1 and R2 here
+        elseif startsWith(cfg_type,'scCamellia') % we reverse R1 and R2 here
             fastq_file = {sample_name+"_L001_R2_001.fastq.gz", sample_name+"_L001_R1_001.fastq.gz"};
             analyze_CARLIN(fastq_file,char(sample_type), char(output_dir_1), ...
                 'read_override_CB_denoised',res.read_cutoff_CB_override,'read_override_UMI_denoised',res.read_cutoff_UMI_override);
