@@ -70,14 +70,14 @@ function output_all_from_summary(SampleList,input_dir,template,varargin)
             save(sprintf("%s/indel_freq_vs_length.mat", output_dir), 'ins_freq', 'del_freq');
 
             
-            close all
+            %close all
             %plot_highlighted_alleles(summary, length(summary.alleles)-1);
-            plot_highlighted_alleles(summary, 200);
+            %plot_highlighted_alleles(summary, 200);
             %     file_name="plot_highlighted_alleles.eps";
             %     print('-depsc2','-painters',file_name);
-            file_name="highlight_alleles.png";
-            axis tight;
-            print(file_name,'-dpng',['-r' num2str(resolution)]);
+            %file_name="highlight_alleles.png";
+            %axis tight;
+            %print(file_name,'-dpng',['-r' num2str(resolution)]);
             %saveas(gcf,file_name)
 
             close all
